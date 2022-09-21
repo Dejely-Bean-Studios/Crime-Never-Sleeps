@@ -10,3 +10,6 @@ Crime Never Sleeps (name tentative) is an up-and-coming murder mystery puzzle ga
 5. Once feature is completely developed, pull request opened to main
 6. PR will be reviewed and merged if new code deploys well
 7. Branch closed after merge, member can work on new task
+
+
+Since RPGMaker searches for directories, we need to ensure proper directory structure and keep all folders, but we can remove all default assets inside these folders.
