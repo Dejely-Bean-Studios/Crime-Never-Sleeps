@@ -11,8 +11,8 @@ Scene_Lockpick_1.prototype.initialize = function() {
 
 Scene_Lockpick_1.prototype.create = function() {
     Scene_Lockpick_1.prototype.create.call(this);
-    this._lockpick_window_1 = new Window_Lockpick_1(20, 20, 5000, 4000);
-    this.addWindow(this._lockpick_window_1)
+    this._lockpick_window_1 = new Window_Lockpick_1(0, 0, 300, 200);
+    this.addWindow(this._lockpick_window_1);
 }
 
 function Window_Lockpick_1() {
