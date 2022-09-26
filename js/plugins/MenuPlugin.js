@@ -7,11 +7,11 @@ Scene_Lockpick_1.prototype.constructor = Scene_Lockpick_1;
 
 Scene_Lockpick_1.prototype.initialize = function() {
     Scene_MenuBase.prototype.initialize.call(this);
-};
+}
 
 Scene_Lockpick_1.prototype.create = function() {
-    Scene_Lockpick_1.prototype.create.call(this);
-    this._lockpick_window_1 = new Window_Lockpick_1(0, 0, 300, 200);
+    Scene_MenuBase.prototype.create.call(this);
+    this._lockpick_window_1 = new Window_Lockpick_1(0, 0, 816, 624);
     this.addWindow(this._lockpick_window_1);
 }
 
