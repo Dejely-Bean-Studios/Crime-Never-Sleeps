@@ -1,6 +1,5 @@
 //import Scene_MenuBase  from ".\\rpg_scenes";
 Input.keyMapper["76"] = "lockpick_menu_1"; //L
-_alias_scene_map_update = Scene_Map.prototype.update;
 
 class Lockpick_menu_1 {
     constructor() {
@@ -58,7 +57,14 @@ Sprite_mirror.prototype.constructor = Sprite_mirror;
 
 let lockpick_menu_1 = new Lockpick_menu_1();
 
+_alias_scene_map_update = Scene_Map.prototype.update;
 Scene_Map.prototype.update = function() {
     _alias_scene_map_update.call(this);
     if (Input.isTriggered("lockpick_menu_1")) SceneManager.push(lockpick_menu_1.get_scene_lockpick_1());
 }
+
+_alias_custom_pluginCommand = Game_Interpreter.prototype.pluginCommand;
+Game_Interpreter.prototype.pluginCommand = function(command, args) {
+    _alias_custom_pluginCommand.call(this, command, args);
+    if(command === "LockPick_1") SceneManager.push(lockpick_menu_1.get_scene_lockpick_1());
+};
