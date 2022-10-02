@@ -41,15 +41,22 @@ Scene_Inventory.prototype.initialize = function() {
 
 Scene_Inventory.prototype.create = function() {
     Scene_MenuBase.prototype.create.call(this);
-    this._inventorywindow = new Window_Inventory(0, 0, 480, 480);
+    this._inventorywindow = new Window_Inventory(50, 50, 480, 480);// TODO center inventory
+    ImageManager.reserveFace("Actor2");
     this.addWindow(this._inventorywindow)
+}
+
+Scene_Inventory.prototype.start = function() {
+    Scene_MenuBase.prototype.start.call(this);
+    this._inventorywindow.refresh();
 }
 
 
 Scene_Inventory.prototype.update = function() {
+    Scene_MenuBase.prototype.update.call(this);
     // Close the inventory on keypress
     if (Input.isTriggered('escape') || Input.isTriggered('I')) {
-        SceneManager.pop();
+        this.popScene();
     }
 }
 
@@ -64,8 +71,8 @@ Window_Inventory.prototype.constructor = Window_Inventory;
 // Initialize the inventory
 Window_Inventory.prototype.initialize = function(x, y, width, height) {
     Window_Selectable.prototype.initialize.call(this, x, y, width, height);
-    this.drawInventory()
     this.activate();
+    this.setHandler("ok", this.moreInfo())
 }
 
 // Draw the contents of the inventory
@@ -77,5 +84,35 @@ Window_Inventory.prototype.drawInventory = function() {
 
 Window_Inventory.prototype.update = function() {
     Window_Selectable.prototype.update.call(this);
-    this.drawInventory();
+    this.drawText("Inventory", 1, 1, 500, "left") // TODO implement title correctly
 }
+
+Window_Inventory.prototype.moreInfo = function() {
+    // TODO make it so when an item is selected a zoomed in picture appears
+}
+
+// ------------------------------ other code ------------------------------
+
+Window_Inventory.prototype.maxItems = function () {
+    return 3;
+}
+
+Window_Inventory.prototype.maxPageRows = function () {
+    return 3;
+}
+Window_Inventory.prototype.maxCols = function () {
+    return 3;
+}
+
+Window_Inventory.prototype.maxPageItems = function () {
+    return this.maxPageRows() * this.maxCols();
+}
+
+Window_Inventory.prototype.drawItem = function (index) {
+    var itemRect = this.itemRect(index);
+    this.drawFace("Actor2", 3 + index, itemRect.x, itemRect.y, itemRect.width / 2, itemRect.height / 2);
+}
+
+Window_Inventory.prototype.itemHeight = function() {
+    return (this.height - this.padding * 2) / this.maxPageRows();
+};
