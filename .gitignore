@@ -3,6 +3,9 @@
 # ignore in accordance with GitCompatibility Patch
 save/*
 
+# ignore imported plugins
+js/plugins/KadokawaPlugins
+
 # ignore all default assets but maintain some dummy ones for directory creation
 # audio/bgm/*
 # !audio/bgm/Town1.m4a
