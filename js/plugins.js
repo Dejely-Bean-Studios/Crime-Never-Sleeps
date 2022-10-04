@@ -4,5 +4,6 @@ var $plugins =
 [
 {"name":"Community_Basic","status":true,"description":"Basic plugin for manipulating important parameters.","parameters":{"cacheLimit":"20","screenWidth":"816","screenHeight":"624","changeWindowWidthTo":"","changeWindowHeightTo":"","renderingMode":"auto","alwaysDash":"off"}},
 {"name":"MadeWithMv","status":false,"description":"Show a Splash Screen \"Made with MV\" and/or a Custom Splash Screen before going to main screen.","parameters":{"Show Made With MV":"true","Made with MV Image":"MadeWithMv","Show Custom Splash":"false","Custom Image":"","Fade Out Time":"120","Fade In Time":"120","Wait Time":"160"}},
-{"name":"Lockpicking_Game","status":true,"description":"","parameters":{}}
+{"name":"Lockpicking_Game","status":true,"description":"","parameters":{}},
+{"name":"GitCompatibilityPatch","status":true,"description":"Formats RPG maker files when the game is run in playtest mode to allow them to be auto merged in most cases.","parameters":{"Format All":"false","Debug":"false","Remove RPG Maker Data":"true","Expand Map Groups":"true","Manage Events":"true","Disable Indentation":"true","Blacklist":"[\"actors.json\", \"animations.json\", \"armors.json\", \"classes.json\", \"commonevents.json\", \"enemies.json\", \"items.json\", \"skills.json\", \"states.json\", \"tilesets.json\", \"troops.json\", \"weapons.json\"]"}}
 ];
