@@ -94,9 +94,17 @@ Scene_MoreInfo.prototype.create = function() {
     this.addWindow(this._item1);
 };
 
-Scene_MoreInfo.prototype = Object.start = function() {
+Scene_MoreInfo.prototype.start = function() {
     Scene_MenuBase.prototype.start.call(this);
     this._item1.drawAllItems();
+}
+
+Scene_MoreInfo.prototype.update = function() {
+    Scene_MenuBase.prototype.update.call(this);
+    // Close zoomed in image on keypress
+    if (Input.isTriggered('ok') || Input.isTriggered('cancel')) {
+        this.popScene();
+    }
 }
 
 //=============================================================
@@ -115,8 +123,9 @@ Window_CmdTest.prototype.initialize = function(x, y) {
     this.activate();
 }
 
-Window_Command.prototype.makeCommandList = function() {
+Window_CmdTest.prototype.makeCommandList = function() {
     this.addCommand("test", "command1")
+    this.addCommand("test2", "command1")
 };
 
 
@@ -181,7 +190,7 @@ Window_MoreInfo.prototype.initialize = function(x, y, width, height) {
     this.width = width;
     this.height = height;
     this.drawAllItems();
-    this.hide();
+    // this.hide();
 }
 
 Window_MoreInfo.prototype.drawAllItems = function() {
