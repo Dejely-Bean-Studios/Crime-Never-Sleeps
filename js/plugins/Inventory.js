@@ -24,9 +24,9 @@ Input.keyMapper["73"] = "I";
 var itemID = 0
 
 // Open the inventory on keypress
-_alias_scene_map_update = Scene_Map.prototype.update;
+_alias_map_update = Scene_Map.prototype.update;
 Scene_Map.prototype.update = function() {
-    _alias_scene_map_update.call(this);
+    _alias_map_update.call(this);
     if (Input.isTriggered("I")) {
         SceneManager.push(Scene_Inventory)
     }
@@ -174,7 +174,7 @@ Window_Inventory.prototype.windowHeight = function() {
 
 Window_Inventory.prototype.drawItem = function (index) {
     var itemRect = this.itemRect(index);
-    this.drawFace("Actor2", 3 + index, itemRect.x + 10, itemRect.y + 10, itemRect.width - 20, itemRect.height - 20);
+    this.drawFace("Actor1", 3 + index, itemRect.x + 10, itemRect.y + 10, itemRect.width - 20, itemRect.height - 20);
 }
 
 Window_Inventory.prototype.itemHeight = function() {
@@ -207,11 +207,11 @@ Window_MoreInfo.prototype.drawAllItems = function() {
     this.contents.clear();
     switch (this.image){
         case 1:
-            this.drawFace("Actor2", 3, -20, -20, this.width, this.height);
+            this.drawFace("Actor1", 3, -20, -20, this.width, this.height);
             this.drawText("Test1", 0, 0, this.width, "left")
             break;
         case 2:
-            this.drawFace("Actor2", 4, -20, -20, this.width, this.height);
+            this.drawFace("Actor1", 4, -20, -20, this.width, this.height);
             this.drawText("Test2", 0, 0, this.width, "left")
             break;
         default:
