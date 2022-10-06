@@ -6,17 +6,22 @@
  * @plugindesc Displays the inventory
  * @author Ethan Chung
  *
- * @param Placeholder
- * @desc This is a placeholder
- * @default ??????
+ * 
  *
  * @help
- * Temp
+ * To open and close the inventory on any screen press i
+ * To close the inventory press i again or esc
+ * 
+ * Once in the inventory select an item using enter to view more details
+ * To exit this screen press enter again or esc
  *
  */
 
 // Map I to a command
 Input.keyMapper["73"] = "I";
+
+// Tracks which comman is pressed and is used to display the correct image in more info
+var itemID = 0
 
 // Open the inventory on keypress
 _alias_scene_map_update = Scene_Map.prototype.update;
@@ -26,7 +31,6 @@ Scene_Map.prototype.update = function() {
         SceneManager.push(Scene_Inventory)
     }
 }
-
 
 //=============================================================
 //                              Scenes                        =
@@ -49,7 +53,8 @@ Scene_Inventory.prototype.create = function() {
     Scene_MenuBase.prototype.create.call(this);
     // TODO center inventory
     this._inventorywindow = new Window_Inventory(100, 100);
-    this._inventorywindow.setHandler("command1", this.moreInfo.bind(this));
+    this._inventorywindow.setHandler("command1", this.moreInfo.bind(this, 1));
+    this._inventorywindow.setHandler("command2", this.moreInfo.bind(this, 2));
     this.addWindow(this._inventorywindow);
 }
 
@@ -66,7 +71,8 @@ Scene_Inventory.prototype.update = function() {
     }
 }
 
-Scene_Inventory.prototype.moreInfo = function() {
+Scene_Inventory.prototype.moreInfo = function(itemNum) {
+    itemID = itemNum
     SceneManager.push(Scene_MoreInfo);
 }
 
@@ -89,12 +95,15 @@ Scene_MoreInfo.prototype.create = function() {
     this._item2 = new Window_MoreInfo(300, 200, 200, 200, 2);
     this.addWindow(this._item1);
     this.addWindow(this._item2);
+    this._item1.hide();
+    this._item2.hide();
 };
 
 Scene_MoreInfo.prototype.start = function() {
     Scene_MenuBase.prototype.start.call(this);
     this._item1.drawAllItems();
     this._item2.drawAllItems();
+    this.item()
 }
 
 Scene_MoreInfo.prototype.update = function() {
@@ -102,6 +111,20 @@ Scene_MoreInfo.prototype.update = function() {
     // Close zoomed in image on keypress
     if (Input.isTriggered('ok') || Input.isTriggered('cancel')) {
         this.popScene();
+    }
+}
+
+Scene_MoreInfo.prototype.item = function() {
+    console.log(itemID)
+    switch (itemID) {
+        case 1:
+            this._item1.show();
+            break;
+        case 2:
+            this._item2.show();
+            break;
+        default:
+            break;
     }
 }
 
@@ -124,7 +147,7 @@ Window_Inventory.prototype.initialize = function(x, y) {
 
 Window_Inventory.prototype.makeCommandList = function() {
     this.addCommand("test1", "command1")
-    this.addCommand("test2", "command1")
+    this.addCommand("test2", "command2")
 };
 
 Window_Inventory.prototype.maxCols = function () {
@@ -147,9 +170,7 @@ Window_Inventory.prototype.windowHeight = function() {
     return 240; // previously this.fittingHeight(this.numVisibleRows())
 };
 
-
-
-//-----------------------Experimental commands-------------------------
+//*********** commands to be changed for final version *************
 
 Window_Inventory.prototype.drawItem = function (index) {
     var itemRect = this.itemRect(index);
@@ -164,7 +185,7 @@ Window_Inventory.prototype.itemHeight = function() {
 //----------------------------MoreInfo Window------------------------------------
 //when an item in the inventory is selected show a zoomed in icon and a short description
 
-function Window_MoreInfo() { //TODO change name to moreInfo
+function Window_MoreInfo() {
     this.initialize.apply(this, arguments);
 }
 
@@ -180,7 +201,6 @@ Window_MoreInfo.prototype.initialize = function(x, y, width, height, image) {
     this.width = width;
     this.height = height;
     this.image = image;
-    // this.hide();
 }
 
 Window_MoreInfo.prototype.drawAllItems = function() {
@@ -198,9 +218,3 @@ Window_MoreInfo.prototype.drawAllItems = function() {
             break;
     }
 }
-
-// Window_MoreInfo.prototype.update = function() {
-//     Window_Base.prototype.update.call(this);
-// }
-
-
