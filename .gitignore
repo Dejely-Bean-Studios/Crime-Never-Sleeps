@@ -1,0 +1,60 @@
+# save config
+
+# ignore in accordance with GitCompatibility Patch
+save/*
+
+# ignore imported plugins
+js/plugins/KadokawaPlugins
+
+# ignore all default assets but maintain some dummy ones for directory creation
+# audio/bgm/*
+# !audio/bgm/Town1.m4a
+
+
+# audio/bgs/*
+# !audio/bgs/City.*
+
+# audio/me/*
+# !audio/me/Curse1.m4a
+
+# audio/se/*
+# !audio/se/Absorb1.m4a
+
+# img/animations/*
+# !img/animations/Absorb.png
+
+# img/battlebacks1/*
+# !img/battlebacks1/Castle1.png
+
+# img/battlebacks2/*
+# !img/battlebacks2/Brick.png
+
+# img/characters/*
+# !img/characters/People1.png
+
+# img/enemies/*
+# !img/enemies/Rat.png
+
+# img/faces/*
+# !img/faces/Actor1.png
+
+# img/parallaxes/*
+# !img/parallaxes/BlueSky.png
+
+# img/sv_actors/*
+# !img/sv_actors/Actor1_1.png
+
+# img/sv_enemies/*
+# !img/sv_enemies/Actor1_3.png
+
+# img/system/*
+# !img/system/Balloon.png
+
+# img/tilesets/*
+# !img/tilesets/World_A1.png
+
+# img/titles1/*
+# !img/titles1/Book.png
+
+# img/titles2/*
+# !img/Floral.png

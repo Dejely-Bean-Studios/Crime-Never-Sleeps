@@ -1,13 +1,13 @@
 {
 "airship": {
 "bgm": {
-"name": "Ship3",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
-"characterIndex": 3,
-"characterName": "Vehicle",
+"characterIndex": 0,
+"characterName": "Actor1",
 "startMapId": 0,
 "startX": 0,
 "startY": 0
@@ -28,7 +28,7 @@
 },
 {
 "type": 1,
-"weaponImageId": 1
+"weaponImageId": 0
 },
 {
 "type": 1,
@@ -76,7 +76,7 @@
 }
 ],
 "battleBgm": {
-"name": "Battle1",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
@@ -87,20 +87,20 @@
 "battlerName": "Dragon",
 "boat": {
 "bgm": {
-"name": "Ship1",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 "characterIndex": 0,
-"characterName": "Vehicle",
+"characterName": "Actor1",
 "startMapId": 0,
 "startX": 0,
 "startY": 0
 },
 "currencyUnit": "G",
 "defeatMe": {
-"name": "Defeat1",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
@@ -126,48 +126,43 @@
 "Body",
 "Accessory"
 ],
-"gameTitle": "TestGame",
+"gameTitle": "Crime Never Sleeps",
 "gameoverMe": {
-"name": "Gameover1",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 "locale": "en_US",
-"magicSkills": [
-1
-],
+"magicSkills": [],
 "menuCommands": [
 true,
-true,
-true,
-true,
-true,
+false,
+false,
+false,
+false,
 true
 ],
-"optDisplayTp": true,
+"optDisplayTp": false,
 "optDrawTitle": true,
 "optExtraExp": false,
 "optFloorDeath": false,
-"optFollowers": true,
+"optFollowers": false,
 "optSideView": false,
 "optSlipDeath": false,
 "optTransparent": false,
 "partyMembers": [
-1,
-2,
-3,
-4
+1
 ],
 "ship": {
 "bgm": {
-"name": "Ship2",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
-"characterIndex": 1,
-"characterName": "Vehicle",
+"characterIndex": 0,
+"characterName": "Actor1",
 "startMapId": 0,
 "startX": 0,
 "startY": 0
@@ -185,150 +180,150 @@ true
 "volume": 90
 },
 {
-"name": "Decision1",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Cancel2",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Buzzer1",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Equip1",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Save",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Load",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Battle1",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Run",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Attack3",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Damage4",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Collapse1",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Collapse2",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Collapse3",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Damage5",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Collapse4",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Recovery",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Miss",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Evasion1",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Evasion2",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Reflection",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Shop1",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Item3",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 },
 {
-"name": "Item3",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
 }
 ],
-"startMapId": 4,
-"startX": 7,
-"startY": 7,
+"startMapId": 1,
+"startX": 12,
+"startY": 9,
 "switches": [
 "",
-"",
+"Nighttime",
 "",
 "",
 "",
@@ -503,10 +498,10 @@ null,
 }
 ],
 "testTroopId": 4,
-"title1Name": "Castle",
+"title1Name": "Book",
 "title2Name": "",
 "titleBgm": {
-"name": "Theme6",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
@@ -536,7 +531,7 @@ null,
 ],
 "versionId": 0,
 "victoryMe": {
-"name": "Victory1",
+"name": "",
 "pan": 0,
 "pitch": 100,
 "volume": 90
