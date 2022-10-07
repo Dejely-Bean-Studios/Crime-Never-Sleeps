@@ -1,4 +1,25 @@
-//import Scene_MenuBase  from ".\\rpg_scenes";
+//=============================================================================
+// LockPicking_Game.js
+//=============================================================================
+
+/*:
+ * @plugindesc Opens a laser puzzle
+ * @author Danic Crispin
+ *
+ * 
+ *
+ * @help
+ * To open and close the menu on any screen press l (L)
+ * To close the puzzle press esc
+ * 
+ * To rotate the mirrors, click on them.
+ * To complete the puzzle, get the green sensor activated.
+ * 
+ * To activate the puzzle through an event, create a plugin event
+ * and type in:
+ * LockPick_1
+ * 
+ */
 Input.keyMapper["76"] = "lockpick_menu_1"; //L
 
 class Lockpick_menu_1 {
