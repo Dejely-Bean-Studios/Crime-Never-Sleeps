@@ -214,5 +214,10 @@ Window_MoreInfo.prototype.initialize = function(x, y, width, height, image) {
 
 Window_MoreInfo.prototype.drawAllItems = function() {
     this.contents.clear(); 
-    this.drawFace("Actor1", this.image, -20, -20, this.width, this.height)
+    if ($gameSwitches.value(this.image)) {
+        this.drawFace("Actor1", this.image, -20, -20, this.width, this.height)
+    }
+    else {
+        this.drawFace("Actor1", 0, -20, -20, this.width, this.height)
+    }
 }
