@@ -22,6 +22,7 @@
 
 var parameters = PluginManager.parameters('Inventory');
 
+var selected_item = 0;
 // Map I to a command
 Input.keyMapper["73"] = "I";
 var clues = Number(parameters['numClues']);
@@ -80,6 +81,7 @@ Scene_Inventory.prototype.update = function() {
 Scene_Inventory.prototype.moreInfo = function(itemNum) {
     itemID = itemNum
     SceneManager.push(Scene_MoreInfo);
+    selected_item = itemNum;
 }
 
 //------------------------MoreInfo Scene-------------------------------------------------
@@ -140,6 +142,8 @@ Window_Inventory.prototype.constructor = Window_Inventory;
 Window_Inventory.prototype.initialize = function(x, y) {
     Window_HorzCommand.prototype.initialize.call(this, x, y);
     this.activate();
+    this.select(selected_item);
+    selected_item = 0
 }
 
 Window_Inventory.prototype.makeCommandList = function() {
