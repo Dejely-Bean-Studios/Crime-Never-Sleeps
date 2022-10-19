@@ -20,6 +20,12 @@
  * @default 6
  */
 
+
+// TODO make background an image
+// TODO triggers to show/hide items
+// TODO figure out how to access game switches $gameSwitches.value(1)
+// TODO if switch is on show item, else show blank item
+
 var parameters = PluginManager.parameters('Inventory');
 
 var selected_item = 0;
@@ -172,7 +178,12 @@ Window_Inventory.prototype.windowHeight = function() {
 
 Window_Inventory.prototype.drawItem = function (index) {
     var itemRect = this.itemRect(index);
-    this.drawFace("Actor1", index, itemRect.x + 10, itemRect.y + 10, itemRect.width - 20, itemRect.height - 20); //TODO change to item symbols
+    if ($gameSwitches.value(index)) {//TODO offset index by necessary amount
+        this.drawFace("Actor1", index, itemRect.x + 10, itemRect.y + 10, itemRect.width - 20, itemRect.height - 20); //TODO change to item symbols
+    }
+    else {
+        this.drawFace("Actor1", 0, itemRect.x + 10, itemRect.y + 10, itemRect.width - 20, itemRect.height - 20);
+    }
 }
 
 Window_Inventory.prototype.itemHeight = function() {
