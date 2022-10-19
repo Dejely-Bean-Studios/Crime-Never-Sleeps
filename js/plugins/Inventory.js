@@ -136,6 +136,7 @@ Window_Inventory.prototype.constructor = Window_Inventory;
 
 Window_Inventory.prototype.initialize = function(x, y) {
     Window_HorzCommand.prototype.initialize.call(this, x, y);
+    this.setBackgroundType(-1);
     this.activate();
     this.select(selected_item);
     selected_item = 0
@@ -143,7 +144,7 @@ Window_Inventory.prototype.initialize = function(x, y) {
 
 Window_Inventory.prototype.makeCommandList = function() {
     for (var i = 0; i < clues; i++) {
-        this.addCommand("Item" + i, "command" + i); //TODO make text button into an image
+        this.addCommand("Item" + i, "command" + i);
     }
 };
 
