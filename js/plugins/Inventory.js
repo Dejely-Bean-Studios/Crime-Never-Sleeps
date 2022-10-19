@@ -19,9 +19,9 @@
 
 // Map I to a command
 Input.keyMapper["73"] = "I";
-
-// Tracks which comman is pressed and is used to display the correct image in more info
-var itemID = 0
+var clues = 6;
+// Tracks which command is pressed and is used to display the correct image in more info
+var itemID = 0;
 
 // Open the inventory on keypress
 _alias_map_update = Scene_Map.prototype.update;
@@ -53,8 +53,9 @@ Scene_Inventory.prototype.create = function() {
     Scene_MenuBase.prototype.create.call(this);
     // TODO center inventory
     this._inventorywindow = new Window_Inventory(100, 100);
-    this._inventorywindow.setHandler("command1", this.moreInfo.bind(this, 1));
-    this._inventorywindow.setHandler("command2", this.moreInfo.bind(this, 2));
+    for (var i = 0; i < clues; i++) {
+        this._inventorywindow.setHandler("command" + i, this.moreInfo.bind(this, i));
+    }
     this.addWindow(this._inventorywindow);
 }
 
@@ -87,22 +88,23 @@ Scene_MoreInfo.prototype.constructor = Scene_MoreInfo;
 
 Scene_MoreInfo.prototype.initialize = function() {
     Scene_MenuBase.prototype.initialize.call(this);
+    this.windows = {};
 };
 
 Scene_MoreInfo.prototype.create = function() {
     Scene_MenuBase.prototype.create.call(this);
-    this._item1 = new Window_MoreInfo(300, 200, 200, 200, 1);//TODO make scalable
-    this._item2 = new Window_MoreInfo(300, 200, 200, 200, 2);
-    this.addWindow(this._item1);
-    this.addWindow(this._item2);
-    this._item1.hide();
-    this._item2.hide();
+    for (var i = 0; i < clues; i++) {
+        this.windows["_item" + i] = new Window_MoreInfo(300, 200, 200, 200, i);
+        this.addWindow(this.windows["_item" + i]);
+    }
+
 };
 
 Scene_MoreInfo.prototype.start = function() {
     Scene_MenuBase.prototype.start.call(this);
-    this._item1.drawAllItems();
-    this._item2.drawAllItems();
+    for (var i = 0; i < clues; i++) {
+        this.windows["_item" + i].drawAllItems();
+    }
     this.item()
 }
 
@@ -115,17 +117,7 @@ Scene_MoreInfo.prototype.update = function() {
 }
 
 Scene_MoreInfo.prototype.item = function() {
-    console.log(itemID)
-    switch (itemID) {
-        case 1:
-            this._item1.show();
-            break;
-        case 2:
-            this._item2.show();
-            break;
-        default:
-            break;
-    }
+    this.windows["_item" + itemID].show();
 }
 
 //=============================================================
@@ -146,8 +138,9 @@ Window_Inventory.prototype.initialize = function(x, y) {
 }
 
 Window_Inventory.prototype.makeCommandList = function() {
-    this.addCommand("test1", "command1")
-    this.addCommand("test2", "command2")
+    for (var i = 0; i < clues; i++) {
+        this.addCommand("Item" + i, "command" + i); //TODO make text button into an image
+    }
 };
 
 Window_Inventory.prototype.maxCols = function () {
@@ -174,7 +167,7 @@ Window_Inventory.prototype.windowHeight = function() {
 
 Window_Inventory.prototype.drawItem = function (index) {
     var itemRect = this.itemRect(index);
-    this.drawFace("Actor1", 3 + index, itemRect.x + 10, itemRect.y + 10, itemRect.width - 20, itemRect.height - 20);
+    this.drawFace("Actor1", 3 + index, itemRect.x + 10, itemRect.y + 10, itemRect.width - 20, itemRect.height - 20); //TODO change to item symbols
 }
 
 Window_Inventory.prototype.itemHeight = function() {
@@ -204,7 +197,7 @@ Window_MoreInfo.prototype.initialize = function(x, y, width, height, image) {
 }
 
 Window_MoreInfo.prototype.drawAllItems = function() {
-    this.contents.clear();
+    this.contents.clear(); //TODO make scalable
     switch (this.image){
         case 1:
             this.drawFace("Actor1", 3, -20, -20, this.width, this.height);
