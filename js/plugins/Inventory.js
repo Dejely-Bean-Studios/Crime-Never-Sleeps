@@ -15,11 +15,16 @@
  * Once in the inventory select an item using enter to view more details
  * To exit this screen press enter again or esc
  *
+ * @param numClues
+ * @desc The number of clues in the game
+ * @default 6
  */
+
+var parameters = PluginManager.parameters('Inventory');
 
 // Map I to a command
 Input.keyMapper["73"] = "I";
-var clues = 6;
+var clues = Number(parameters['numClues']);
 // Tracks which command is pressed and is used to display the correct image in more info
 var itemID = 0;
 
