@@ -100,18 +100,13 @@ Scene_MoreInfo.prototype.initialize = function() {
 
 Scene_MoreInfo.prototype.create = function() {
     Scene_MenuBase.prototype.create.call(this);
-    for (var i = 0; i < clues; i++) {
-        this.windows["_item" + i] = new Window_MoreInfo(300, 200, 200, 200, i);
-        this.addWindow(this.windows["_item" + i]);
-    }
-
+        this.windows["_item" + itemID] = new Window_MoreInfo(300, 200, 200, 200, itemID);
+        this.addWindow(this.windows["_item" + itemID]);
 };
 
 Scene_MoreInfo.prototype.start = function() {
     Scene_MenuBase.prototype.start.call(this);
-    for (var i = 0; i < clues; i++) {
-        this.windows["_item" + i].drawAllItems();
-    }
+        this.windows["_item" + itemID].drawAllItems();
     this.item()
 }
 
@@ -176,7 +171,7 @@ Window_Inventory.prototype.windowHeight = function() {
 
 Window_Inventory.prototype.drawItem = function (index) {
     var itemRect = this.itemRect(index);
-    this.drawFace("Actor1", 3 + index, itemRect.x + 10, itemRect.y + 10, itemRect.width - 20, itemRect.height - 20); //TODO change to item symbols
+    this.drawFace("Actor1", index, itemRect.x + 10, itemRect.y + 10, itemRect.width - 20, itemRect.height - 20); //TODO change to item symbols
 }
 
 Window_Inventory.prototype.itemHeight = function() {
@@ -206,17 +201,6 @@ Window_MoreInfo.prototype.initialize = function(x, y, width, height, image) {
 }
 
 Window_MoreInfo.prototype.drawAllItems = function() {
-    this.contents.clear(); //TODO make scalable
-    switch (this.image){
-        case 1:
-            this.drawFace("Actor1", 3, -20, -20, this.width, this.height);
-            this.drawText("Test1", 0, 0, this.width, "left")
-            break;
-        case 2:
-            this.drawFace("Actor1", 4, -20, -20, this.width, this.height);
-            this.drawText("Test2", 0, 0, this.width, "left")
-            break;
-        default:
-            break;
-    }
+    this.contents.clear(); 
+    this.drawFace("Actor1", this.image, -20, -20, this.width, this.height)
 }
