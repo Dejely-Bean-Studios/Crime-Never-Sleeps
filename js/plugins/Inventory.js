@@ -18,13 +18,23 @@
  * @param numClues
  * @desc The number of clues in the game
  * @default 6
+ * 
+ * @param clue1
+ * 
+ * @param clue2
+ * 
+ * @param clue3
+ * 
+ * @param clue4
+ * 
+ * @param clue5
+ * 
+ * @param clue6
  */
 
 
 // TODO make background an image
-// TODO triggers to show/hide items
-// TODO figure out how to access game switches $gameSwitches.value(1)
-// TODO if switch is on show item, else show blank item
+// TODO make item desciriptions params
 
 var parameters = PluginManager.parameters('Inventory');
 
@@ -214,10 +224,13 @@ Window_MoreInfo.prototype.initialize = function(x, y, width, height, image) {
 
 Window_MoreInfo.prototype.drawAllItems = function() {
     this.contents.clear(); 
+    // TODO, make window layout nicer
     if ($gameSwitches.value(this.image)) {
         this.drawFace("Actor1", this.image, -20, -20, this.width, this.height)
+        this.drawText(parameters["clue" + (this.image + 1)], 0, 0, this.width, 'center');
     }
     else {
         this.drawFace("Actor1", 0, -20, -20, this.width, this.height)
+        this.drawText("You don't have this clue yet", 0, 0, this.width, 'center');
     }
 }
