@@ -19,22 +19,32 @@
  * @desc The number of clues in the game
  * @default 6
  * 
+ * @param switchStart
+ * @desc the number at which the switches for the clues start
+ * 
  * @param clue1
+ * @desc the description text for the clue
  * 
  * @param clue2
+ * @desc the description text for the clue
  * 
  * @param clue3
+ * @desc the description text for the clue
  * 
  * @param clue4
+ * @desc the description text for the clue
  * 
  * @param clue5
+ * @desc the description text for the clue
  * 
  * @param clue6
+ * @desc the description text for the clue
  */
 
 
 // TODO make background an image
-// TODO make item desciriptions params
+// TODO make offset param based
+// TODO reserve images
 
 var parameters = PluginManager.parameters('Inventory');
 
@@ -50,7 +60,7 @@ _alias_map_update = Scene_Map.prototype.update;
 Scene_Map.prototype.update = function() {
     _alias_map_update.call(this);
     if (Input.isTriggered("I")) {
-        SceneManager.push(Scene_Inventory)
+        SceneManager.push(Scene_Inventory);
     }
 }
 
@@ -74,7 +84,7 @@ Scene_Inventory.prototype.initialize = function() {
 Scene_Inventory.prototype.create = function() {
     Scene_MenuBase.prototype.create.call(this);
     // TODO center inventory
-    this._inventorywindow = new Window_Inventory(100, 100);
+    this._inventorywindow = new Window_Inventory();
     for (var i = 0; i < clues; i++) {
         this._inventorywindow.setHandler("command" + i, this.moreInfo.bind(this, i));
     }
@@ -95,7 +105,7 @@ Scene_Inventory.prototype.update = function() {
 }
 
 Scene_Inventory.prototype.moreInfo = function(itemNum) {
-    itemID = itemNum
+    itemID = itemNum;
     SceneManager.push(Scene_MoreInfo);
     selected_item = itemNum;
 }
@@ -150,7 +160,9 @@ function Window_Inventory() {
 Window_Inventory.prototype = Object.create(Window_HorzCommand.prototype);
 Window_Inventory.prototype.constructor = Window_Inventory;
 
-Window_Inventory.prototype.initialize = function(x, y) {
+Window_Inventory.prototype.initialize = function() {
+    x = (Graphics.boxWidth / 2) - (this.windowWidth() / 2)
+    y = (Graphics.boxHeight / 2) - (this.windowHeight() / 2)
     Window_HorzCommand.prototype.initialize.call(this, x, y);
     this.setBackgroundType(-1);
     this.activate();
@@ -165,7 +177,7 @@ Window_Inventory.prototype.makeCommandList = function() {
 };
 
 Window_Inventory.prototype.maxCols = function () {
-    return 4;
+    return 3;
 }
 
 Window_HorzCommand.prototype.numVisibleRows = function() {
@@ -175,30 +187,35 @@ Window_HorzCommand.prototype.numVisibleRows = function() {
 Window_Inventory.prototype.maxPageRows = function () {
     return 2;
 }
+Window_Inventory.prototype.windowHeight = function() {
+    return this.fittingHeight(this.numVisibleRows()) * 2;
+};
 
 Window_Inventory.prototype.windowWidth = function() {
-    return 480;
+    return this.windowHeight() * (3/2);
 };
 
-Window_Inventory.prototype.windowHeight = function() {
-    return 240; // previously this.fittingHeight(this.numVisibleRows())
-};
 
 //*********** commands to be changed for final version *************
 
 Window_Inventory.prototype.drawItem = function (index) {
     var itemRect = this.itemRect(index);
-    if ($gameSwitches.value(index)) {//TODO offset index by necessary amount
-        this.drawFace("Actor1", index, itemRect.x + 10, itemRect.y + 10, itemRect.width - 20, itemRect.height - 20); //TODO change to item symbols
+    if ($gameSwitches.value(index + Number(parameters['switchStart']))) {//TODO offset index by necessary amount
+        this.drawFace("inventoryclues1", index + 1, itemRect.x + 10, itemRect.y + 10, itemRect.width - 20, itemRect.height - 20); //TODO change to item symbols
     }
     else {
-        this.drawFace("Actor1", 0, itemRect.x + 10, itemRect.y + 10, itemRect.width - 20, itemRect.height - 20);
+        this.drawFace("inventoryclues1", 0, itemRect.x + 10, itemRect.y + 10, itemRect.width - 20, itemRect.height - 20);
     }
 }
 
 Window_Inventory.prototype.itemHeight = function() {
     return (this.height - this.padding * 2) / this.maxPageRows();
 };
+
+Window_Inventory.prototype.itemWidth = function() {
+    return this.itemHeight()
+}
+
 
 
 //----------------------------MoreInfo Window------------------------------------
@@ -212,7 +229,7 @@ Window_MoreInfo.prototype = Object.create(Window_Base.prototype);
 Window_MoreInfo.prototype.constructor = Window_MoreInfo;
 
 // Initialize the inventory
-Window_MoreInfo.prototype.initialize = function(x, y, width, height, image) {
+Window_MoreInfo.prototype.initialize = function(x, y, width, height, image) { // TODO change this to be defined within the thing
     Window_Base.prototype.initialize.call(this, x, y, width, height);
     this.activate();
     this.x = x;
@@ -225,12 +242,12 @@ Window_MoreInfo.prototype.initialize = function(x, y, width, height, image) {
 Window_MoreInfo.prototype.drawAllItems = function() {
     this.contents.clear(); 
     // TODO, make window layout nicer
-    if ($gameSwitches.value(this.image)) {
-        this.drawFace("Actor1", this.image, -20, -20, this.width, this.height)
+    if ($gameSwitches.value(this.image + Number(parameters['switchStart']))) { // change offset to necessary amount
+        this.drawFace("clues1", this.image + 1, -20, -20, this.width, this.height)
         this.drawText(parameters["clue" + (this.image + 1)], 0, 0, this.width, 'center');
     }
     else {
-        this.drawFace("Actor1", 0, -20, -20, this.width, this.height)
+        this.drawFace("clues1", 0, -20, -20, this.width, this.height)
         this.drawText("You don't have this clue yet", 0, 0, this.width, 'center');
     }
 }
