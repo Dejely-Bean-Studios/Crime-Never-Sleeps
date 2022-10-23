@@ -44,6 +44,7 @@ class Drag_1 {
             this.box_6_occupied = false;
             this.occupied = [this.box_1_occupied, this.box_2_occupied, this.box_3_occupied, this.box_4_occupied, this.box_5_occupied, this.box_6_occupied];
 
+            this.frames = 0;
         }
         Scene_drag.prototype = Object.create(Scene_MenuBase.prototype);
         this.scene_drag = (Scene_drag.prototype.constructor = Scene_drag);
@@ -54,6 +55,7 @@ class Drag_1 {
             // create window
             this._drag_window_1 = new Window_Drag(0, 0, Graphics.width, (3/8)*Graphics.height - 10);
             this._drag_window_2 = new Window_Drag(0, ((3/8)*Graphics.height) - 10, Graphics.width, ((5/8)*Graphics.height) + 10);
+            this._score_window = this._score_window = new Window_Drag(0, 0, Graphics.width, (3/8)*Graphics.height - 10);
             
             this.addWindow(this._drag_window_1);
             this.addWindow(this._drag_window_2);
@@ -190,9 +192,14 @@ class Drag_1 {
             this.items = [this.oven, this.tv, this.book, this.dishes, this.door, this.dead];
             this.boxes_x = [(Graphics.width/7), (2*Graphics.width/7), (3*Graphics.width/7), (4*Graphics.width/7), (5*Graphics.width/7), (6*Graphics.width/7)];
             this.boxes_y = [height_box, height_box, height_box, height_box, height_box, height_box];
+
+            this.button = new My_Sprite(this.bit_box, ((20/22.5)*Graphics.width), (Graphics.height/2) - 17, 0.5, 0.5, 1.5, 0.5);
+            this.addChild(this.button);
         }
 
         this.scene_drag.prototype.update = function() {
+            this.frames += 1;
+            this.frames %= 101;
             // exits scene when esc key is pressed
             if (Input.isTriggered("cancel")) SceneManager.pop();
 
@@ -206,11 +213,27 @@ class Drag_1 {
             }
 
             for (let i = 0; i < this.grab.length; i++){
-                if (TouchInput.isTriggered() && (this.boxes[i].x - 50 < TouchInput.x) && (TouchInput.x < this.boxes[i].x + 50) && 
+                if ((this.boxes[i].x - 50 < TouchInput.x) && (TouchInput.x < this.boxes[i].x + 50) && 
                 (this.boxes[i].y - 50 < TouchInput.y) && (TouchInput.y < this.boxes[i].y + 50)) {
-                    this.grab[i] = true;
-                    this.addChild(this.boxes[i]);
-                    this.addChild(this.items[i]);
+                    if (TouchInput.isTriggered()) {
+                        this.grab[i] = true;
+                        this.addChild(this.boxes[i]);
+                        this.addChild(this.items[i]);
+                    } else if (this.grab.every((element) => element == false)) {
+                        let scale = 1.1;
+                        this.boxes[i].scale.x = scale;
+                        this.boxes[i].scale.y = scale;
+
+                        this.items[i].scale.x = scale;
+                        this.items[i].scale.y = scale;
+                    } 
+                }  else {
+                    let scale = 1;
+                    this.boxes[i].scale.x = scale;
+                    this.boxes[i].scale.y = scale;
+
+                    this.items[i].scale.x = scale;
+                    this.items[i].scale.y = scale;
                 }
 
                 if (this.grab[i]) {
@@ -230,8 +253,6 @@ class Drag_1 {
 
                             this.items[i].x = this.shadow_boxes[j].x;
                             this.items[i].y = this.shadow_boxes[j].y
-                            
-                            //this.occupied[j] = true;
                             break;
                         } else {
                             this.boxes[i].x = this.boxes_x[i];
@@ -241,9 +262,53 @@ class Drag_1 {
                             this.items[i].y = this.boxes_y[i];
                         }
                     }
-
                     this.grab[i] = false;
+                }            
+            }
+
+            if ((this.button.x - 70 < TouchInput.x) && (TouchInput.x < this.button.x + 70) && 
+            (this.button.y - 25 < TouchInput.y) && (TouchInput.y < this.button.y + 25) && this.grab.every((element) => element == false)) {
+                this.button.scale.x = 1.6;
+                this.button.scale.y = 0.6;
+
+                if (TouchInput.isTriggered()) {
+                    let right_answers = 0;
+                    if ((this.items[0].x == this.shadow_boxes[1].x) && (this.items[0].y == this.shadow_boxes[1].y)){
+                        right_answers += 1;
+                    }
+                    if ((this.items[1].x == this.shadow_boxes[4].x) && (this.items[1].y == this.shadow_boxes[4].y)){
+                        right_answers += 1;
+                    }
+                    if ((this.items[2].x == this.shadow_boxes[0].x) && (this.items[2].y == this.shadow_boxes[0].y)){
+                        right_answers += 1;
+                    }
+                    if ((this.items[3].x == this.shadow_boxes[2].x) && (this.items[3].y == this.shadow_boxes[2].y)) {
+                        right_answers += 1;
+                    }
+                    if ((this.items[4].x == this.shadow_boxes[3].x) && (this.items[4].y == this.shadow_boxes[3].y)){
+                        right_answers += 1;
+                    }
+                    if ((this.items[5].x == this.shadow_boxes[5].x) && (this.items[5].y == this.shadow_boxes[5].y)){
+                        right_answers += 1;
+                    }
+                    console.log(right_answers);
+
+                    if (right_answers == 6) {
+                        SceneManager.pop();
+                    } else {
+                        this._score_window = this._score_window = new Window_Drag(0, 0, Graphics.width, (3/8)*Graphics.height - 10);
+                        this.addWindow(this._score_window);
+                        this._score_window.drawText("You've correctly identified " + String(right_answers) + " events.", 0, 50, Graphics.width, "center");
+                        this.frames = 0;
+                    }
                 }
+            } else {
+                this.button.scale.x = 1.5;
+                this.button.scale.y = 0.5;
+            }
+            console.log(this.frames);
+            if (this.frames == 100) {
+                this._windowLayer.removeChild(this._score_window);
             }
         }
 
@@ -291,4 +356,10 @@ _alias_custom_pluginCommand_drag = Game_Interpreter.prototype.pluginCommand;
 Game_Interpreter.prototype.pluginCommand = function(command, args) {
     _alias_custom_pluginCommand_drag.call(this, command, args);
     if(command === "ClickAndDrag_1") SceneManager.push(drag_1.get_scene_drag());
+};
+
+TouchInput._onMouseMove = function(event) {
+    var x = Graphics.pageToCanvasX(event.pageX);
+    var y = Graphics.pageToCanvasY(event.pageY);
+    this._onMove(x, y);
 };
