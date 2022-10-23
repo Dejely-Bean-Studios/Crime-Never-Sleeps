@@ -1,0 +1,11 @@
+\C[0]: default dialogue color
+\C[16]: thinking color
+\C[17]: clue color
+\C[18]: ominous color
+
+
+\fb: bold (doesn't show in preview)
+
+\.: wait 1/4 second
+\|: wait 1 second
+\!: wait for button input

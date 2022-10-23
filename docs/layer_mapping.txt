@@ -1,0 +1,21 @@
+LAYER_S 1 office_floor_(rug) 0 0 255 0 0
+LAYER_S 2 office_objects_(norug) 0 0 255 1 0
+LAYER_S 3 office_overlay 0 0 255 5 0
+LAYER_S 4 night_office_floor 0 0 0 0 0
+LAYER_S 5 night_office_objects_(norug) 0 0 0 1 0
+LAYER_S 6 night_office_overlay 0 0 0 5 0
+\SE[1]  
+
+---
+
+LAYER_S 7 plaza_background_day 0 0 255 0 0
+LAYER_S 8 plaza_objects_day 0 0 255 1 0
+LAYER_S 9 plaza_overlay_day 0 0 255 5 0
+
+---
+
+LAYER_S 10 lobby_background_day 0 0 255 0 0
+LAYER_S 11 lobby_objects_day 0 0 255 0 0
+
+---
+
