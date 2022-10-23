@@ -318,15 +318,15 @@ true
 "volume": 90
 }
 ],
-"startMapId": 1,
-"startX": 12,
-"startY": 9,
+"startMapId": 5,
+"startX": 7,
+"startY": 6,
 "switches": [
 "",
 "Nighttime",
-"Cat Video 1",
-"Cat Video 2",
-"",
+"Done First Monologue",
+"Done Tutorial",
+"Done Lockpick Tutorial",
 "",
 "",
 "",
