@@ -52,8 +52,11 @@ class Drag_1 {
             Scene_MenuBase.prototype.create.call(this);
 
             // create window
-            this._drag_window_1 = new Window_Drag(0, 0, Graphics.width, Graphics.height);
+            this._drag_window_1 = new Window_Drag(0, 0, Graphics.width, (3/8)*Graphics.height - 10);
+            this._drag_window_2 = new Window_Drag(0, ((3/8)*Graphics.height) - 10, Graphics.width, ((5/8)*Graphics.height) + 10);
+            
             this.addWindow(this._drag_window_1);
+            this.addWindow(this._drag_window_2);
 
             // get images from files
             this.bit_box = create_bitmap("img/pictures/", "box_base");
@@ -63,71 +66,130 @@ class Drag_1 {
             this.bit_dishes = create_bitmap("img/pictures/", "dishes");
             this.bit_dead = create_bitmap("img/pictures/", "dead");
             this.bit_buzzer = create_bitmap("img/pictures/", "buzzer");
+            this.bit_text_box = create_bitmap("img/pictures/", "box");
+
+            //this.text_box = new My_Sprite(this.bit_text_box, 0, 0, 0, 0, 1, 1);
+            //this._drag_window_2.addChild(this.text_box);
+            this.setBackgroundOpacity(100);
+            this._drag_window_1.opacity = 255;
+            this._drag_window_2.opacity = 0;
+
+            // draw text
+            let text = "\\fs[23]- At 11PM, Cyrus was \\fb\\C[1]pushed/fell\\fb\\C[0] out of the apartment.\n" +
+            "- Cyrus washed the \\fb\\C[1]dishes\\fb\\C[0] sometime after he made dinner.\n" +
+            "- Cyrus read a \\fb\\C[1]book\\fb\\C[0] sometime before he made dinner.\n" +
+            "- Cyrus never watches \\fb\\C[1]TV\\fb\\C[0] immediately after he washes the dishes.\n" +
+            "- Cyrus' wife mentions that he was\\fi extremely\\fi particular about\n  washing the \\fb\\C[1]dishes\\fb\\C[0] at 8pm, and he never failed to do so.\n\n";
+
+            this._drag_window_1.drawTextEx(text, 5, -5);
+            this._drag_window_2.drawTextEx("\\fs[23]\\C[2]With this in mind, what is a timeline of the events that occurred?\\C[0]", 6, -5);
+
+            let height_ = (3.2/11)*((5/8)*(Graphics.height) + 10) - 40;
+            this._drag_window_2.drawTextEx("\\fb6pm", ((Graphics.width/7) - 38), height_);
+            this._drag_window_2.drawTextEx("\\fb7pm", ((2*Graphics.width/7) - 38), height_);
+            this._drag_window_2.drawTextEx("\\fb8pm", ((3*Graphics.width/7) - 38), height_);
+            this._drag_window_2.drawTextEx("\\fb9pm", ((4*Graphics.width/7) - 38), height_);
+            this._drag_window_2.drawTextEx("\\fb10pm", ((5*Graphics.width/7) - 42), height_);
+            this._drag_window_2.drawTextEx("\\fb11pm", ((6*Graphics.width/7) - 42), height_);
+
+            height_ += 246;
+            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Dinner", ((Graphics.width/7) - 49), height_);
+            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]TV", ((2*Graphics.width/7) - 31), height_);
+            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Reading", ((3*Graphics.width/7) - 55), height_);
+            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Dishes", ((4*Graphics.width/7) - 50), height_);
+            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Door Bell", ((5*Graphics.width/7) - 64), height_);
+            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Death", ((6*Graphics.width/7) - 44), height_);
 
 
             // create sprites
             // boxes
-            this.shadow_box_1 = new My_Sprite(this.bit_box, (Graphics.width/7), (Graphics.height/3), 0.5, 0.5, 1.3, 1.3);
+            let shadow_box_height = (6*(Graphics.height/3)/3)
+            this.shadow_box_1 = new My_Sprite(this.bit_box, (Graphics.width/7), shadow_box_height, 0.5, 0.5, 1.3, 1.3);
             this.shadow_box_1.opacity = 150;
             this.addChild(this.shadow_box_1);
 
-            this.shadow_box_2 = new My_Sprite(this.bit_box, (2*Graphics.width/7), (Graphics.height/3), 0.5, 0.5, 1.3, 1.3);
+            this.shadow_box_2 = new My_Sprite(this.bit_box, (2*Graphics.width/7), shadow_box_height, 0.5, 0.5, 1.3, 1.3);
             this.shadow_box_2.opacity = 150;
             this.addChild(this.shadow_box_2);
 
-            this.shadow_box_3 = new My_Sprite(this.bit_box, (3*Graphics.width/7), (Graphics.height/3), 0.5, 0.5, 1.3, 1.3);
+            this.shadow_box_3 = new My_Sprite(this.bit_box, (3*Graphics.width/7), shadow_box_height, 0.5, 0.5, 1.3, 1.3);
             this.shadow_box_3.opacity = 150;
             this.addChild(this.shadow_box_3);
 
-            this.shadow_box_4 = new My_Sprite(this.bit_box, (4*Graphics.width/7), (Graphics.height/3), 0.5, 0.5, 1.3, 1.3);
+            this.shadow_box_4 = new My_Sprite(this.bit_box, (4*Graphics.width/7), shadow_box_height, 0.5, 0.5, 1.3, 1.3);
             this.shadow_box_4.opacity = 150;
             this.addChild(this.shadow_box_4);
 
-            this.shadow_box_5 = new My_Sprite(this.bit_box, (5*Graphics.width/7), (Graphics.height/3), 0.5, 0.5, 1.3, 1.3);
+            this.shadow_box_5 = new My_Sprite(this.bit_box, (5*Graphics.width/7), shadow_box_height, 0.5, 0.5, 1.3, 1.3);
             this.shadow_box_5.opacity = 150;
             this.addChild(this.shadow_box_5);
 
-            this.shadow_box_6 = new My_Sprite(this.bit_box, (6*Graphics.width/7), (Graphics.height/3), 0.5, 0.5, 1.3, 1.3);
+            this.shadow_box_6 = new My_Sprite(this.bit_box, (6*Graphics.width/7), shadow_box_height, 0.5, 0.5, 1.3, 1.3);
             this.shadow_box_6.opacity = 150;
             this.addChild(this.shadow_box_6);
 
             this.shadow_boxes = [this.shadow_box_1, this.shadow_box_2, this.shadow_box_3, this.shadow_box_4, this.shadow_box_5, this.shadow_box_6]
 
+            let height_box = (7.5*(Graphics.height/3)/3);
+            this.box_1_2 = new My_Sprite(this.bit_box, (Graphics.width/7), height_box, 0.5, 0.5);
+            this.box_1_2.opacity = 50;
+            this.addChild(this.box_1_2);
 
-            this.box_1 = new My_Sprite(this.bit_box, (Graphics.width/7), (2*Graphics.height/3), 0.5, 0.5);
+            this.box_2_2 = new My_Sprite(this.bit_box, (2*Graphics.width/7), height_box, 0.5, 0.5);
+            this.box_2_2.opacity = 50;
+            this.addChild(this.box_2_2);
+
+            this.box_3_2 = new My_Sprite(this.bit_box, (3*Graphics.width/7), height_box, 0.5, 0.5);
+            this.box_3_2.opacity = 50;
+            this.addChild(this.box_3_2);
+
+            this.box_4_2 = new My_Sprite(this.bit_box, (4*Graphics.width/7), height_box, 0.5, 0.5);
+            this.box_4_2.opacity = 50;
+            this.addChild(this.box_4_2);
+
+            this.box_5_2 = new My_Sprite(this.bit_box, (5*Graphics.width/7), height_box, 0.5, 0.5);
+            this.box_5_2.opacity = 50;
+            this.addChild(this.box_5_2);
+
+            this.box_6_2 = new My_Sprite(this.bit_box, (6*Graphics.width/7), height_box, 0.5, 0.5);
+            this.box_6_2.opacity = 50;
+            this.addChild(this.box_6_2);
+
+
+            this.box_1 = new My_Sprite(this.bit_box, (Graphics.width/7), height_box, 0.5, 0.5);
             this.addChild(this.box_1);
-            this.oven = new My_Sprite(this.bit_oven, (Graphics.width/7), (2*Graphics.height/3), 0.5, 0.5);
+            this.oven = new My_Sprite(this.bit_oven, (Graphics.width/7), height_box, 0.5, 0.5);
             this.addChild(this.oven);
 
-            this.box_2 = new My_Sprite(this.bit_box, (2*Graphics.width/7), (2*Graphics.height/3), 0.5, 0.5);
+            this.box_2 = new My_Sprite(this.bit_box, (2*Graphics.width/7), height_box, 0.5, 0.5);
             this.addChild(this.box_2);
-            this.tv = new My_Sprite(this.bit_tv, (2*Graphics.width/7), (2*Graphics.height/3), 0.5, 0.5);
+            this.tv = new My_Sprite(this.bit_tv, (2*Graphics.width/7), height_box, 0.5, 0.5);
             this.addChild(this.tv);
 
-            this.box_3 = new My_Sprite(this.bit_box, (3*Graphics.width/7), (2*Graphics.height/3), 0.5, 0.5);
+            this.box_3 = new My_Sprite(this.bit_box, (3*Graphics.width/7), height_box, 0.5, 0.5);
             this.addChild(this.box_3);
-            this.book = new My_Sprite(this.bit_book, (3*Graphics.width/7), (2*Graphics.height/3), 0.5, 0.5);
+            this.book = new My_Sprite(this.bit_book, (3*Graphics.width/7), height_box, 0.5, 0.5);
             this.addChild(this.book);
 
-            this.box_4 = new My_Sprite(this.bit_box, (4*Graphics.width/7), (2*Graphics.height/3), 0.5, 0.5);
+            this.box_4 = new My_Sprite(this.bit_box, (4*Graphics.width/7), height_box, 0.5, 0.5);
             this.addChild(this.box_4);
-            this.dishes = new My_Sprite(this.bit_dishes, (4*Graphics.width/7), (2*Graphics.height/3), 0.5, 0.5);
+            this.dishes = new My_Sprite(this.bit_dishes, (4*Graphics.width/7), height_box, 0.5, 0.5);
             this.addChild(this.dishes);
 
-            this.box_5 = new My_Sprite(this.bit_box, (5*Graphics.width/7), (2*Graphics.height/3), 0.5, 0.5);
+            this.box_5 = new My_Sprite(this.bit_box, (5*Graphics.width/7), height_box, 0.5, 0.5);
             this.addChild(this.box_5);
-            this.door = new My_Sprite(this.bit_buzzer, (5*Graphics.width/7), (2*Graphics.height/3), 0.5, 0.5);
+            this.door = new My_Sprite(this.bit_buzzer, (5*Graphics.width/7), height_box, 0.5, 0.5);
             this.addChild(this.door);
 
-            this.box_6 = new My_Sprite(this.bit_box, (6*Graphics.width/7), (2*Graphics.height/3), 0.5, 0.5);
+            this.box_6 = new My_Sprite(this.bit_box, (6*Graphics.width/7), height_box, 0.5, 0.5);
             this.addChild(this.box_6);
-            this.dead = new My_Sprite(this.bit_dead, (6*Graphics.width/7), (2*Graphics.height/3), 0.5, 0.5);
+            this.dead = new My_Sprite(this.bit_dead, (6*Graphics.width/7), height_box, 0.5, 0.5);
             this.addChild(this.dead);
 
             this.boxes = [this.box_1, this.box_2, this.box_3, this.box_4, this.box_5, this.box_6];
             this.items = [this.oven, this.tv, this.book, this.dishes, this.door, this.dead];
             this.boxes_x = [(Graphics.width/7), (2*Graphics.width/7), (3*Graphics.width/7), (4*Graphics.width/7), (5*Graphics.width/7), (6*Graphics.width/7)];
-            this.boxes_y = [(2*Graphics.height/3), (2*Graphics.height/3), (2*Graphics.height/3), (2*Graphics.height/3), (2*Graphics.height/3), (2*Graphics.height/3)];
+            this.boxes_y = [height_box, height_box, height_box, height_box, height_box, height_box];
         }
 
         this.scene_drag.prototype.update = function() {
