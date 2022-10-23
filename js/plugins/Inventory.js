@@ -14,6 +14,12 @@
  * 
  * Once in the inventory select an item using enter to view more details
  * To exit this screen press enter again or esc
+ * 
+ * num Clues changes the number of clues in the inventory
+ * 
+ * Switches to activate clues must be sequential, switchStart can be changed to match the start number of the sequence
+ * 
+ * clue# can be changed to change the description of the clues
  *
  * @param numClues
  * @desc The number of clues in the game
@@ -43,8 +49,7 @@
 
 
 // TODO make background an image
-// TODO make offset param based
-// TODO reserve images
+// TODO center moreInfo
 
 var parameters = PluginManager.parameters('Inventory');
 
@@ -79,11 +84,12 @@ Scene_Inventory.prototype.constructor = Scene_Inventory;
 
 Scene_Inventory.prototype.initialize = function() {
     Scene_MenuBase.prototype.initialize.call(this);
+    ImageManager.reserveFace('inventoryclues1')
+    //$gameScreen.showPicture(10, 'box_base', "Center", 600, 300, 100, 100, 255, "Normal")
 };
 
 Scene_Inventory.prototype.create = function() {
     Scene_MenuBase.prototype.create.call(this);
-    // TODO center inventory
     this._inventorywindow = new Window_Inventory();
     for (var i = 0; i < clues; i++) {
         this._inventorywindow.setHandler("command" + i, this.moreInfo.bind(this, i));
@@ -121,12 +127,13 @@ Scene_MoreInfo.prototype.constructor = Scene_MoreInfo;
 
 Scene_MoreInfo.prototype.initialize = function() {
     Scene_MenuBase.prototype.initialize.call(this);
+    ImageManager.reserveFace('clues1')
     this.windows = {};
 };
 
 Scene_MoreInfo.prototype.create = function() {
     Scene_MenuBase.prototype.create.call(this);
-        this.windows["_item" + itemID] = new Window_MoreInfo(300, 200, 200, 200, itemID);
+        this.windows["_item" + itemID] = new Window_MoreInfo(300, 300, itemID);
         this.addWindow(this.windows["_item" + itemID]);
 };
 
@@ -195,13 +202,10 @@ Window_Inventory.prototype.windowWidth = function() {
     return this.windowHeight() * (3/2);
 };
 
-
-//*********** commands to be changed for final version *************
-
 Window_Inventory.prototype.drawItem = function (index) {
     var itemRect = this.itemRect(index);
-    if ($gameSwitches.value(index + Number(parameters['switchStart']))) {//TODO offset index by necessary amount
-        this.drawFace("inventoryclues1", index + 1, itemRect.x + 10, itemRect.y + 10, itemRect.width - 20, itemRect.height - 20); //TODO change to item symbols
+    if ($gameSwitches.value(index + Number(parameters['switchStart']))) {
+        this.drawFace("inventoryclues1", index + 1, itemRect.x + 10, itemRect.y + 10, itemRect.width - 20, itemRect.height - 20); 
     }
     else {
         this.drawFace("inventoryclues1", 0, itemRect.x + 10, itemRect.y + 10, itemRect.width - 20, itemRect.height - 20);
@@ -229,8 +233,11 @@ Window_MoreInfo.prototype = Object.create(Window_Base.prototype);
 Window_MoreInfo.prototype.constructor = Window_MoreInfo;
 
 // Initialize the inventory
-Window_MoreInfo.prototype.initialize = function(x, y, width, height, image) { // TODO change this to be defined within the thing
+Window_MoreInfo.prototype.initialize = function(width, height, image) { // TODO change this to be defined within the thing
+    x = (Graphics.boxWidth / 2) - (width / 2)
+    y = (Graphics.boxHeight / 2) - (height / 2)
     Window_Base.prototype.initialize.call(this, x, y, width, height);
+    this.setBackgroundType(0);
     this.activate();
     this.x = x;
     this.y = y;
@@ -243,11 +250,11 @@ Window_MoreInfo.prototype.drawAllItems = function() {
     this.contents.clear(); 
     // TODO, make window layout nicer
     if ($gameSwitches.value(this.image + Number(parameters['switchStart']))) { // change offset to necessary amount
-        this.drawFace("clues1", this.image + 1, -20, -20, this.width, this.height)
-        this.drawText(parameters["clue" + (this.image + 1)], 0, 0, this.width, 'center');
+        this.drawFace("clues1", this.image + 1, -20, -20, this.width, this.height) // TODO center the image in the window and make higher
+        this.drawText(parameters["clue" + (this.image + 1)], 0, this.height, this.width, 'center');
     }
     else {
         this.drawFace("clues1", 0, -20, -20, this.width, this.height)
-        this.drawText("You don't have this clue yet", 0, 0, this.width, 'center');
+        this.drawText("You don't have this clue yet", 0, this.height/ 2, this.width/1.5, 'center');
     }
 }
