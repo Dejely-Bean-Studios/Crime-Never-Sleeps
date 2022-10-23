@@ -20,7 +20,7 @@
 "encounterList": [],
 "encounterStep": 30,
 "height": 13,
-"note": "LAYER 0 cutscene_1 1 0 255 5 0 0 0\n",
+"note": "LAYER 0 cutscene_2_long 1 0 255 5 0 0 0\nLAYER 1 cutscene_2_detective 0 0 255 6 0 0 \n",
 "parallaxLoopX": false,
 "parallaxLoopY": false,
 "parallaxName": "!cutscene_sidescroll",
