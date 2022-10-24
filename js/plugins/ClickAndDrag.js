@@ -3,23 +3,20 @@
 //=============================================================================
 
 /*:
- * @plugindesc Click and Drag prototype
+ * @plugindesc Association Puzzle 1
  * @author Danic Crispin
  *
  * 
  *
  * @help
- * To open and close the Click and Drag menu on any screen press d
  * To close the inventory press esc
- * 
- * Once in the menu click on the small box and drag it onto the bigger box.
  *
  * To activate the menu through an event, create a plugin event
  * and type in:
  * ClickAndDrag_1
  */
 
-Input.keyMapper["68"] = "drag_1"; //d
+//Input.keyMapper["68"] = "drag_1"; //d
 
 class Drag_1 {
     constructor() {
@@ -45,6 +42,8 @@ class Drag_1 {
             this.occupied = [this.box_1_occupied, this.box_2_occupied, this.box_3_occupied, this.box_4_occupied, this.box_5_occupied, this.box_6_occupied];
 
             this.frames = 0;
+
+            $gameSwitches.setValue(20, false);
         }
         Scene_drag.prototype = Object.create(Scene_MenuBase.prototype);
         this.scene_drag = (Scene_drag.prototype.constructor = Scene_drag);
@@ -295,6 +294,7 @@ class Drag_1 {
                     console.log(right_answers);
 
                     if (right_answers == 6) {
+                        $gameSwitches.setValue(20, true);
                         SceneManager.pop();
                     } else {
                         this._score_window = this._score_window = new Window_Drag(0, 0, Graphics.width, (3/8)*Graphics.height - 10);
