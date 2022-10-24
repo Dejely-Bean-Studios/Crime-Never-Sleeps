@@ -18,6 +18,15 @@
 
 \n<Joe>\SE[1]: Joe start
 \n<Daphne>\SE[2]: Daphne start
-
+\n<Finn>: Finn start
 
 \. . \. . \. .: Dramatic pause
+
+
+
+1. dinner
+2. dishes
+3. falling
+4. buzzed
+5. TV
+6. book
