@@ -19,6 +19,7 @@
 \n<Joe>\SE[1]: Joe start
 \n<Daphne>\SE[2]: Daphne start
 \n<Finn>: Finn start
+\n<Flora>: Flora start
 
 \. . \. . \. .: Dramatic pause
 
