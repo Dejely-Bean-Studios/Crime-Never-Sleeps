@@ -20,6 +20,7 @@
 \n<Daphne>\SE[2]: Daphne start
 \n<Finn>: Finn start
 \n<Flora>: Flora start
+\n<Rellik>: Rellik start
 
 \. . \. . \. .: Dramatic pause
 
