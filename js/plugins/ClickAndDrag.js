@@ -69,6 +69,7 @@ class Drag_1 {
             this.bit_dead = create_bitmap("img/pictures/", "dead");
             this.bit_buzzer = create_bitmap("img/pictures/", "buzzer");
             this.bit_text_box = create_bitmap("img/pictures/", "box");
+            this.bit_check = create_bitmap("img/pictures/", "check")
 
             //this.text_box = new My_Sprite(this.bit_text_box, 0, 0, 0, 0, 1, 1);
             //this._drag_window_2.addChild(this.text_box);
@@ -193,7 +194,7 @@ class Drag_1 {
             this.boxes_x = [(Graphics.width/7), (2*Graphics.width/7), (3*Graphics.width/7), (4*Graphics.width/7), (5*Graphics.width/7), (6*Graphics.width/7)];
             this.boxes_y = [height_box, height_box, height_box, height_box, height_box, height_box];
 
-            this.button = new My_Sprite(this.bit_box, ((20/22.5)*Graphics.width), (Graphics.height/2) - 17, 0.5, 0.5, 1.5, 0.5);
+            this.button = new My_Sprite(this.bit_check, ((20/22.5)*Graphics.width), (Graphics.height/2) - 17, 0.5, 0.5);
             this.addChild(this.button);
         }
 
@@ -268,8 +269,8 @@ class Drag_1 {
 
             if ((this.button.x - 70 < TouchInput.x) && (TouchInput.x < this.button.x + 70) && 
             (this.button.y - 25 < TouchInput.y) && (TouchInput.y < this.button.y + 25) && this.grab.every((element) => element == false)) {
-                this.button.scale.x = 1.6;
-                this.button.scale.y = 0.6;
+                this.button.scale.x = 1.1;
+                this.button.scale.y = 1.1;
 
                 if (TouchInput.isTriggered()) {
                     let right_answers = 0;
@@ -303,8 +304,8 @@ class Drag_1 {
                     }
                 }
             } else {
-                this.button.scale.x = 1.5;
-                this.button.scale.y = 0.5;
+                this.button.scale.x = 1;
+                this.button.scale.y = 1;
             }
             console.log(this.frames);
             if (this.frames == 100) {
