@@ -9,3 +9,9 @@
 \.: wait 1/4 second
 \|: wait 1 second
 \!: wait for button input
+
+\{: Increases the text size by one step.
+\}: Decreases the text size by one step.
+
+\SE[1]: Detective sound
+\SE[2]: Secretary (Daphne) sound
