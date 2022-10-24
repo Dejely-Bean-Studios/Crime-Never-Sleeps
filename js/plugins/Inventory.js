@@ -53,9 +53,6 @@
  * @default Cyrus read a book
  */
 
-
-// TODO make background an image
-
 var Inventory = Inventory || {};
 
 var parameters = PluginManager.parameters('Inventory');
@@ -69,7 +66,7 @@ var clues = Number(parameters['numClues']);
 // Tracks which command is pressed and is used to display the correct image in more info
 var itemID = 0;
 
-inventory_background = 'box_base'
+inventory_background = 'notebook'
 
 ImageManager.reservePicture(inventory_background)
 
@@ -109,7 +106,7 @@ Scene_Inventory.prototype.initialize = function() {
     ImageManager.reserveFace('inventoryclues1')
     picX = Graphics.boxWidth / 2
     picY = Graphics.boxHeight / 2
-    $gameScreen.showPicture(picture_ID, inventory_background, 1, picX, picY, 450, 600, 255, 0);
+    $gameScreen.showPicture(picture_ID, inventory_background, 1, picX, picY, 100, 100, 255, 0);
     back_blur = false;
 };
 
@@ -229,7 +226,7 @@ Window_Inventory.prototype.windowHeight = function() {
 };
 
 Window_Inventory.prototype.windowWidth = function() {
-    return this.windowHeight() * (3/2);
+    return this.windowHeight() * (3/2) + 15;
 };
 
 Window_Inventory.prototype.drawItem = function (index) {
@@ -262,7 +259,7 @@ Window_MoreInfo.prototype.constructor = Window_MoreInfo;
 
 // Initialize the inventory
 Window_MoreInfo.prototype.initialize = function(image) {
-    width = 350;
+    width = 300;
     height = 800
     x = (Graphics.boxWidth / 2) - (width / 2)
     y = (Graphics.boxHeight / 3) - (height / 2)
@@ -279,9 +276,8 @@ Window_MoreInfo.prototype.initialize = function(image) {
 
 Window_MoreInfo.prototype.drawAllItems = function() {
     this.contents.clear(); 
-    // TODO, make window layout nicer
-    if ($gameSwitches.value(this.image + Number(parameters['switchStart']))) { // change offset to necessary amount
-        this.drawFace("clues1", this.image + 1, -18, 30, this.width, this.height) // TODO center the image in the window and make higher
+    if ($gameSwitches.value(this.image + Number(parameters['switchStart']))) {
+        this.drawFace("clues1", this.image + 1, -18, 30, this.width, this.height)
         this.drawText(parameters["clue" + (this.image + 1)], 0, this.height / 1.5, this.width - 36, 'center');
     }
     else {
