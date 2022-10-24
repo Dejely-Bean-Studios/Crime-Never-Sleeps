@@ -1,0 +1,34 @@
+\C[0]: default dialogue color
+\C[16]: thinking color
+\C[17]: clue color
+\C[18]: ominous color
+
+
+\fb: bold (doesn't show in preview)
+
+\.: wait 1/4 second
+\|: wait 1 second
+\!: wait for button input
+
+\{: Increases the text size by one step.
+\}: Decreases the text size by one step.
+
+\SE[1]: Detective sound
+\SE[2]: Secretary (Daphne) sound
+
+\n<Joe>\SE[1]: Joe start
+\n<Daphne>\SE[2]: Daphne start
+\n<Finn>: Finn start
+\n<Flora>: Flora start
+\n<Rellik>: Rellik start
+
+\. . \. . \. .: Dramatic pause
+
+
+
+1. dinner
+2. dishes
+3. falling
+4. buzzed
+5. TV
+6. book
