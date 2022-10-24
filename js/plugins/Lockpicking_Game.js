@@ -43,6 +43,7 @@ class Lockpick_menu_1 {
             this.adder = false;
             this.game_finished = false;
             this.counter = 0;
+            this.tutorial_counter = 0;
             $gameSwitches.setValue(18, false);
         }
         Scene_Lockpick_1.prototype = Object.create(Scene_MenuBase.prototype);
@@ -92,6 +93,8 @@ class Lockpick_menu_1 {
 
             if (!this.game_finished) {
 
+                if (Input.isTriggered("ok")) this.tutorial_counter += 1;
+
                 if (this.yellow_activated) {
                     this.sensor_yellow.visible = false;
                     this.left_box_mirror.visible = true;
@@ -128,7 +131,7 @@ class Lockpick_menu_1 {
 
                         this.mirror_1.rotation = this.angle_1 * 0.5;
                         this.laser_2.rotation = this.angle_1;
-                        console.log(this.mirror_1.rotation/(Math.PI/8));
+                        this.tutorial_counter += 1;
                     }
                 } else {
                     let scale = 1;
@@ -166,7 +169,7 @@ class Lockpick_menu_1 {
                             this.mirror_2.rotation = (this.angle_2 - (5 * angle_unit)) * 0.5;
                             this.laser_5.rotation = this.angle_2 - (5 * angle_unit);
                         }
-                        console.log(this.angle_2/angle_unit);
+                        this.tutorial_counter += 1;
                     }
                 } else {
                     let scale = 1;
@@ -187,7 +190,7 @@ class Lockpick_menu_1 {
                 } else {
                     this.mirror_1_square = false;
                     this.laser_3.visible = false;
-                    this.laser_2.scale.y = 1.3;
+                    this.laser_2.scale.y = 1.5;
                     this.laser_6.visible = false;
                 }
 
@@ -201,7 +204,7 @@ class Lockpick_menu_1 {
                 } else {
                     this.mirror_2_square = false;
                     this.laser_7.visible = false;
-                    this.laser_5.scale.y = 1.3;
+                    this.laser_5.scale.y = 1.5;
                 }
 
                 // if yellow sensor activated and mirror 2 at the correct angle
@@ -210,7 +213,7 @@ class Lockpick_menu_1 {
                     //this.left_pane.opacity = 255;
                     //this.right_pane.opacity = 255;
                     this.prism.opacity = 255;
-                    this.addChild(this.prism);
+                    this._lockpick_window_1.addChild(this.prism);
                     this.laser_6.scale.y = 0.68;
                     this.laser_7.scale.y = 0.68;
                 }
@@ -235,6 +238,43 @@ class Lockpick_menu_1 {
 
                 // detect whether the yellow sensor has been activated
                 if (this.mirror_1_square && this.mirror_2_square) this.yellow_activated = true;
+
+                if (this.tutorial_counter == 0) {
+                    this.tutorial_window = new Window_Lockpick_1(250, 4*Graphics.height/11, Graphics.width - 347, Graphics.height/6);
+                    this.tutorial_window.drawTextEx("Ghost elements can be activated\nusing \\C[2]c\\C[6]o\\C[3]l\\C[1]o\\C[4]u\\C[5]r\\C[0] sensors.", -1, -1);
+                    this.addWindow(this.tutorial_window);
+                    this.tutorial_counter += 1;
+
+                    this.addChild(this.prism_shine);
+                    this.addChild(this.prism_demo_1);
+
+                    this.addChild(this.right_box_shine);
+                    //this.addChild(this.right_box_demo);
+                    this.addChild(this.left_box_shine);
+                    //this.addChild(this.left_box_demo);
+
+                } else if ((this.tutorial_counter == 1) || (this.tutorial_counter == 4));
+                else if (this.tutorial_counter == 3) {
+                    this.tutorial_window = new Window_Lockpick_1(200, 175, Graphics.width - 400, Graphics.height/6);
+                    //this.tutorial_window.drawTextEx("Aim the laser at the \\C[2]\\fbred\\C[0]\\fb sensor\nto activate it. This will unlock\nthis lock.", 10, 10);
+                    this.tutorial_window.drawTextEx("The \\C[2]p\\C[6]r\\C[3]i\\C[1]s\\C[4]m\\C[0] can combine the\ncolours of multiple lasers.", 0, -1);
+                    this.addWindow(this.tutorial_window);
+                    this.tutorial_counter += 1;
+
+                    this.addChild(this.prism_shine);
+                    this.addChild(this.prism_demo_2);
+
+                } else {
+                    this._windowLayer.removeChild(this.tutorial_window);
+                    this.removeChild(this.prism_shine);
+                    this.removeChild(this.prism_demo_1);
+                    this.removeChild(this.prism_demo_2);
+
+                    this.removeChild(this.right_box_shine);
+                    //this.removeChild(this.right_box_demo);
+                    this.removeChild(this.left_box_shine);
+                    //this.removeChild(this.left_box_demo);
+                }
             }
         }
 
@@ -270,72 +310,89 @@ class Lockpick_menu_1 {
             // create sprites
             // boxes
             this.left_box = new My_Sprite(this.bit_box_base, ((Graphics.width/2) - 27), 500, 1, 0.5);
-            this.addChild(this.left_box);
+            this._lockpick_window_1.addChild(this.left_box);
             this.left_box.opacity = 100;
 
+            this.left_box_demo = new My_Sprite(this.bit_box_base, ((Graphics.width/2) - 27), 500, 1, 0.5);
+            this.left_box_demo.opacity = 100;
+            this.left_box_shine = new My_Sprite(this.bit_box_base, ((Graphics.width/2) - 27), 500, 1, 0.5, 1.1, 1.1);
+            this.left_box_shine.setColorTone([1000, 1000, 1000, 1000]);
+
+
             this.right_box = new My_Sprite(this.bit_box_base, ((Graphics.width/2) + 27), 500, 0, 0.5);
-            this.addChild(this.right_box);
+            this._lockpick_window_1.addChild(this.right_box);
             this.right_box.opacity = 100;
+
+            this.right_box_demo = new My_Sprite(this.bit_box_base, ((Graphics.width/2) + 27), 500, 0, 0.5);
+            this.right_box_demo.opacity = 100;
+            this.right_box_shine = new My_Sprite(this.bit_box_base, ((Graphics.width/2) + 27), 500, 0, 0.5, 1.1, 1.1);
+            this.right_box_shine.setColorTone([1000, 1000, 1000, 1000]);
 
             
             // prism
             this.prism = new My_Sprite(this.bit_prism, Graphics.width/2, 0, 0.5, 0, 1, 1);
             this.prism.opacity = 100;
-            this.addChild(this.prism);
+            this._lockpick_window_1.addChild(this.prism);
+
+            this.prism_demo_1 = new My_Sprite(this.bit_prism, Graphics.width/2, 0, 0.5, 0, 1, 1);
+            this.prism_demo_1.opacity = 100;
+            this.prism_demo_2 = new My_Sprite(this.bit_prism, Graphics.width/2, 0, 0.5, 0, 1, 1);
+            this.prism_shine = new My_Sprite(this.bit_prism, Graphics.width/2, 0, 0.5, 0, 1.1, 1.1);
+            this.prism_shine.setColorTone([1000, 1000, 1000, 1000]);
 
 
             // lasers
             this.laser_1 = new My_Sprite(this.bit_laser_yellow, 100, 0, 0.5, 0, 1, 0.85);
-            this.addChild(this.laser_1);
+            this._lockpick_window_1.addChild(this.laser_1);
 
             this.laser_2 = new My_Sprite(this.bit_laser_yellow, 100, 500, 0.5, 1, 1, 1.3);
-            this.addChild(this.laser_2);
+            this._lockpick_window_1.addChild(this.laser_2);
             this.laser_2.rotation = Math.PI/8;
 
-            this.laser_3 = new My_Sprite(this.bit_laser_yellow, (Graphics.width - 100), 500, 0.5, 1, 1, 1.3);
-            this.addChild(this.laser_3);
+            this.laser_3 = new My_Sprite(this.bit_laser_yellow, (Graphics.width - 100), 500, 0.5, 1, 1, 1.5);
+            this._lockpick_window_1.addChild(this.laser_3);
             this.laser_3.rotation = (-3 * Math.PI/8);
 
             this.laser_4 = new My_Sprite(this.bit_laser_blue, (Graphics.width - 100), 0, 0.5, 0, 1, 0.85);
-            this.addChild(this.laser_4);
+            this._lockpick_window_1.addChild(this.laser_4);
             this.laser_4.visible = false;
 
-            this.laser_5 = new My_Sprite(this.bit_laser_blue, (Graphics.width - 100), 500, 0.5, 1, 1, 1.3);
-            this.addChild(this.laser_5);
+            this.laser_5 = new My_Sprite(this.bit_laser_blue, (Graphics.width - 100), 500, 0.5, 1, 1, 1.5);
+            this._lockpick_window_1.addChild(this.laser_5);
             this.laser_5.rotation = -Math.PI/2;
             this.laser_5.visible = false;
 
-            this.laser_6 = new My_Sprite(this.bit_laser_yellow, ((Graphics.width/2) - 27 - 45), 500, 0.5, 1, 1, 1.3);
-            this.addChild(this.laser_6);
+            this.laser_6 = new My_Sprite(this.bit_laser_yellow, ((Graphics.width/2) - 27 - 45), 500, 0.5, 1, 1, 1.5);
+            this._lockpick_window_1.addChild(this.laser_6);
             this.laser_6.visible = false;
 
-            this.laser_7 = new My_Sprite(this.bit_laser_blue, ((Graphics.width/2) + 27 + 45), 500, 0.5, 1, 1, 1.3);
-            this.addChild(this.laser_7);
+            this.laser_7 = new My_Sprite(this.bit_laser_blue, ((Graphics.width/2) + 27 + 45), 500, 0.5, 1, 1, 1.5);
+            this._lockpick_window_1.addChild(this.laser_7);
             this.laser_7.visible = false;
 
-            this.laser_8 = new My_Sprite(this.bit_laser_green, (Graphics.width/2), 130, 0.5, 0, 1, 1.3);
-            this.addChild(this.laser_8);
+            this.laser_8 = new My_Sprite(this.bit_laser_green, (Graphics.width/2), 130, 0.5, 0, 1, 1.5);
+            this._lockpick_window_1.addChild(this.laser_8);
             this.laser_8.visible = false;
 
 
             // base or sensors
             this.base_blue = new My_Sprite(this.bit_base, (Graphics.width - 100), 0, 0.5, 0);
-            this.addChild(this.base_blue);
+            this._lockpick_window_1.addChild(this.base_blue);
 
 
             this.sensor_yellow = new My_Sprite(this.bit_sensor_yellow, (Graphics.width - 100), 0, 0.5, 0);
-            this.addChild(this.sensor_yellow);
+            this._lockpick_window_1.addChild(this.sensor_yellow);
 
             this.sensor_blue = new My_Sprite(this.bit_sensor_blue, (Graphics.width * 0.27), 0, 0.5, 0);
-            this.addChild(this.sensor_blue);
+            this._lockpick_window_1.addChild(this.sensor_blue);
 
             this.sensor_green = new My_Sprite(this.bit_sensor_green, (Graphics.width / 2), Graphics.height, 0.5, 0);
-            this.addChild(this.sensor_green);
+            this._lockpick_window_1.addChild(this.sensor_green);
             this.sensor_green.rotation = Math.PI;
 
 
             this.base_yellow = new My_Sprite(this.bit_base, 100, 0, 0.5, 0);
-            this.addChild(this.base_yellow);
+            this._lockpick_window_1.addChild(this.base_yellow);
 
             /*this.base = new My_Sprite(this.bit_base, (Graphics.width / 2), 80, 0.5, 0);
             this.addChild(this.base);
@@ -351,19 +408,19 @@ class Lockpick_menu_1 {
             this.right_pane.opacity = 100;*/
 
             this.left_box_mirror = new My_Sprite(this.bit_box_mirror_2, ((Graphics.width/2) - 27), 500, 1, 0.5);
-            this.addChild(this.left_box_mirror);
+            this._lockpick_window_1.addChild(this.left_box_mirror);
             this.left_box_mirror.visible = false;
 
             this.right_box_mirror = new My_Sprite(this.bit_box_mirror_1, ((Graphics.width/2) + 27), 500, 0, 0.5);
-            this.addChild(this.right_box_mirror);
+            this._lockpick_window_1.addChild(this.right_box_mirror);
             this.right_box_mirror.visible = false;
 
             this.mirror_1 = new My_Sprite(this.bit_mirror, 100, 500);
-            this.addChild(this.mirror_1);
+            this._lockpick_window_1.addChild(this.mirror_1);
             this.mirror_1.rotation = Math.PI/16;
 
             this.mirror_2 = new My_Sprite(this.bit_mirror, (Graphics.width - 100), 500);
-            this.addChild(this.mirror_2);
+            this._lockpick_window_1.addChild(this.mirror_2);
             this.mirror_2.rotation = -7 * Math.PI/16;
         }
 
@@ -428,6 +485,8 @@ class Lockpick_menu_0 {
             }
 
             if (!this.game_finished) {
+
+                if (Input.isTriggered("ok")) this.tutorial_counter += 1;
 
                 // base angle
                 var angle_unit = Math.PI/8;
