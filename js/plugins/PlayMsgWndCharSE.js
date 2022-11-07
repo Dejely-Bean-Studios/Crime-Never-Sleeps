@@ -219,6 +219,7 @@
     switch (code) {
     case 'SE':
       this.charSEmode = this.obtainEscapeParam(textState);
+      console.log(this.charSEmode);
       break;
     case '>':
       // force to play char SE once. 
@@ -293,6 +294,7 @@
         audio.volume = volume4;
         AudioManager.playSe(audio);
       }
+      break;
     case 5:
       if(name5){
         var audio = {};
@@ -301,6 +303,7 @@
         audio.volume = volume5;
         AudioManager.playSe(audio);
       }
+      break;
     case 6:
       if(name6){
         var audio = {};
@@ -309,6 +312,7 @@
         audio.volume = volume6;
         AudioManager.playSe(audio);
       }
+      break;
     default:
       // not supported yet
       break;
