@@ -43,6 +43,54 @@
  * @desc pitch of SE2
  * @default 125
  *
+ * @param name3
+ * @desc filename of SE3
+ * @default Cursor2
+ *
+ * @param volume3
+ * @desc volume of SE3
+ * @default 75
+ *
+ * @param pitch3
+ * @desc pitch of SE3
+ * @default 125
+ * 
+ * @param name4
+ * @desc filename of SE4
+ * @default Cursor2
+ *
+ * @param volume4
+ * @desc volume of SE4
+ * @default 75
+ *
+ * @param pitch4
+ * @desc pitch of SE4
+ * @default 125
+ * 
+ * @param name5
+ * @desc filename of SE5
+ * @default Cursor2
+ *
+ * @param volume5
+ * @desc volume of SE5
+ * @default 75
+ *
+ * @param pitch5
+ * @desc pitch of SE5
+ * @default 125
+ * 
+ * @param name6
+ * @desc filename of SE6
+ * @default Cursor2
+ *
+ * @param volume6
+ * @desc volume of SE6
+ * @default 75
+ *
+ * @param pitch6
+ * @desc pitch of SE6
+ * @default 125
+ * 
  * @help This plugin does not provide plugin commands.
  * 
  * At message window, SE can change by following notation:
@@ -117,12 +165,30 @@
   var defaultMode = Number(parameters['default SE'] || 1);
   var battleDefaultMode = Number(parameters['battle default SE'] || 0);
   var interval = Number(parameters['interval'] || 2);
+
   var name1 = (parameters['name1'] || 'Cursor1');
   var volume1 = Number(parameters['volume1'] || 90);
   var pitch1 = Number(parameters['pitch1'] || 100);
+
   var name2 = (parameters['name2'] || 'Cursor2');
   var volume2 = Number(parameters['volume2'] || 75);
   var pitch2 = Number(parameters['pitch2'] || 125);
+
+  var name3 = (parameters['name3'] || 'Cursor2');
+  var volume3 = Number(parameters['volume3'] || 75);
+  var pitch3 = Number(parameters['pitch3'] || 125);
+
+  var name4 = (parameters['name4'] || 'Cursor2');
+  var volume4 = Number(parameters['volume4'] || 75);
+  var pitch4 = Number(parameters['pitch4'] || 125);
+
+  var name5 = (parameters['name5'] || 'Cursor2');
+  var volume5 = Number(parameters['volume5'] || 75);
+  var pitch5 = Number(parameters['pitch5'] || 125);
+
+  var name6 = (parameters['name6'] || 'Cursor2');
+  var volume6 = Number(parameters['volume6'] || 75);
+  var pitch6 = Number(parameters['pitch6'] || 125);
 
   //
   // initialize variables
@@ -210,6 +276,39 @@
         AudioManager.playSe(audio);
       }
       break;
+    case 3:
+      if(name3){
+        var audio = {};
+        audio.name = name3;
+        audio.pitch = pitch3;
+        audio.volume = volume3;
+        AudioManager.playSe(audio);
+      }
+      break;
+    case 4:
+      if(name4){
+        var audio = {};
+        audio.name = name4;
+        audio.pitch = pitch4;
+        audio.volume = volume4;
+        AudioManager.playSe(audio);
+      }
+    case 5:
+      if(name5){
+        var audio = {};
+        audio.name = name5;
+        audio.pitch = pitch5;
+        audio.volume = volume5;
+        AudioManager.playSe(audio);
+      }
+    case 6:
+      if(name6){
+        var audio = {};
+        audio.name = name6;
+        audio.pitch = pitch6;
+        audio.volume = volume6;
+        AudioManager.playSe(audio);
+      }
     default:
       // not supported yet
       break;

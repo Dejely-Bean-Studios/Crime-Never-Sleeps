@@ -8,14 +8,23 @@ LAYER_S 6 night_office_overlay 0 0 0 5 0
 
 ---
 
-LAYER_S 7 plaza_background_day 0 0 255 0 0
-LAYER_S 8 plaza_objects_day 0 0 255 1 0
-LAYER_S 9 plaza_overlay_day 0 0 255 5 0
+LAYER_S 7 fullplaza_background 0 0 255 0 0
+LAYER_S 8 fullplaza_objects 0 0 0 1 0
+LAYER_S 9 fullplaza_overlay 0 0 255 5 0
+LAYER_S 10 fullplaza_objects_body 0 0 255 1 0
 
 ---
 
-LAYER_S 10 lobby_background_day 0 0 255 0 0
-LAYER_S 11 lobby_objects_day 0 0 255 0 0
+LAYER_S 11 apartment_lobby_background 0 0 255 0 0
+LAYER_S 12 apartment_lobby_objects 0 0 255 0 0
 
 ---
+
+LAYER_S 13 apartment_background_day 0 0 255 0 0
+LAYER_S 14 apartment_objects_day 0 0 255 1 0
+LAYER_S 15 apartment_overlay_day 0 0 255 5 0
+LAYER_S 16 apartment_background_night 0 0 0 0 0
+LAYER_S 17 apartment_objects_night 0 0 0 1 0
+LAYER_S 18 apartment_overlay_night 0 0 0 5 0
+
 

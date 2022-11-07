@@ -15,6 +15,9 @@
 
 \SE[1]: Detective sound
 \SE[2]: Secretary (Daphne) sound
+\SE[3]: Rellik sound
+\SE[4]: Finn sound
+\SE[5]: Flora sound
 
 \n<Joe>\SE[1]: Joe start
 \n<Daphne>\SE[2]: Daphne start
