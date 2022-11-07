@@ -78,27 +78,27 @@
  * 
  * @param clue13
  * @desc the description text for the clue
- * @default
+ * @default A scrap of brown cloth
  * 
  * @param clue14
  * @desc the description text for the clue
- * @default
+ * @default A frayed rope
  * 
  * @param clue15
  * @desc the description text for the clue
- * @default
+ * @default A wallet
  * 
  * @param clue16
  * @desc the description text for the clue
- * @default
+ * @default Dirty boot prints
  * 
  * @param clue17
  * @desc the description text for the clue
- * @default
+ * @default Blood splattered on the piano machine
  * 
  * @param clue18
  * @desc the description text for the clue
- * @default
+ * @default A man crushed by a piano
  * 
  * @param clue19
  * @desc the description text for the clue
@@ -153,7 +153,7 @@ ImageManager.reservePicture(inventory_background)
 
 var picture_ID = 14
 
-var inventory_width = 339
+var inventory_width = 315
 
 // Open the inventory on keypress
 _alias_map_update = Scene_Map.prototype.update;
