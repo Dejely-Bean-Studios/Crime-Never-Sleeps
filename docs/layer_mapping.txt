@@ -27,4 +27,12 @@ LAYER_S 16 apartment_background_night 0 0 0 0 0
 LAYER_S 17 apartment_objects_night 0 0 0 1 0
 LAYER_S 18 apartment_overlay_night 0 0 0 5 0
 
+---
+
+LAYER_S 19 restaurant_background_day 0 0 255 0 0
+LAYER_S 20 restaurant_objects_day 0 0 255 1 0
+LAYER_S 21 restaurant_overlay_day 0 0 255 5 0
+LAYER_S 22 restaurant_background_night 0 0 0 0 0
+LAYER_S 23 restaurant_objects_night 0 0 0 1 0
+LAYER_S 24 restaurant_overlay_night 0 0 0 5 0
 
