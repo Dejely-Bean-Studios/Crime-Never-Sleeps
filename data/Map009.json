@@ -20,7 +20,7 @@
 "encounterList": [],
 "encounterStep": 30,
 "height": 13,
-"note": "LAYER_S 7 plaza_background_day 0 0 255 0 0\nLAYER_S 8 plaza_objects_day 0 0 255 1 0\nLAYER_S 9 plaza_overlay_day 0 0 255 5 0",
+"note": "LAYER_S 20 plaza_background_day 0 0 255 0 0\nLAYER_S 21 plaza_objects_day 0 0 255 1 0\nLAYER_S 22 plaza_overlay_day 0 0 255 5 0",
 "parallaxLoopX": false,
 "parallaxLoopY": false,
 "parallaxName": "!plaza_flat_day",
