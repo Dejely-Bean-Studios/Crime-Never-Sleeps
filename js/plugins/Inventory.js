@@ -102,31 +102,31 @@
  * 
  * @param clue19
  * @desc the description text for the clue
- * @default
+ * @default An interrogation camera
  * 
  * @param clue20
  * @desc the description text for the clue
- * @default
+ * @default 
  * 
  * @param clue21
  * @desc the description text for the clue
- * @default
+ * @default Finn covered in blood
  * 
  * @param clue22
  * @desc the description text for the clue
- * @default
+ * @default An open vent
  * 
  * @param clue23
  * @desc the description text for the clue
- * @default
+ * @default 
  * 
  * @param clue24
  * @desc the description text for the clue
- * @default
+ * @default An unhinged window
  */
 
 
-// TODO add items for the new murders
+// TODO add items for the new murders, finish writing last descriptions
 // TODO make the page it's on based on the murder
 
 var Inventory = Inventory || {};
