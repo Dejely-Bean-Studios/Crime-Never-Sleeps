@@ -36,3 +36,13 @@ LAYER_S 22 restaurant_background_night 0 0 0 0 0
 LAYER_S 23 restaurant_objects_night 0 0 0 1 0
 LAYER_S 24 restaurant_overlay_night 0 0 0 5 0
 
+---
+
+LAYER_S 25 factory_background_day 0 0 255 0 0
+LAYER_S 26 factory_objects_day 0 0 255 1 0
+LAYER_S 27 factory_overlay_day 0 0 255 5 0
+LAYER_S 28 factory_background_night 0 0 0 0 0
+LAYER_S 29 factory_objects_night 0 0 0 1 0
+LAYER_S 30 factory_overlay_night 0 0 0 5 0
+LAYER_S 31 factory_cloth_day 0 0 0 5 0
+
