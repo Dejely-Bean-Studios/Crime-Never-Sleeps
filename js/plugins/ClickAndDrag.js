@@ -291,7 +291,6 @@ class Drag_1 {
                     if ((this.items[5].x == this.shadow_boxes[5].x) && (this.items[5].y == this.shadow_boxes[5].y)){
                         right_answers += 1;
                     }
-                    console.log(right_answers);
 
                     if (right_answers == 6) {
                         $gameSwitches.setValue(20, true);
@@ -307,7 +306,6 @@ class Drag_1 {
                 this.button.scale.x = 1;
                 this.button.scale.y = 1;
             }
-            console.log(this.frames);
             if (this.frames == 100) {
                 this._windowLayer.removeChild(this._score_window);
             }
