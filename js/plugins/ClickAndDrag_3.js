@@ -16,7 +16,7 @@
  * ClickAndDrag_3
  */
 
-//Input.keyMapper["72"] = "drag_3";
+Input.keyMapper["72"] = "drag_3";
 
 class Drag_3 {
     constructor() {
@@ -78,8 +78,8 @@ class Drag_3 {
 
             // draw text
             // TODO change text
-            let text = "\\fs[24]- The \\fb\\C[1]blood splatter\\fb\\C[0] occured immediately after the man was\n  \\fb\\C[1]crushed\\fb\\C[0].\n" +
-            "- The \\fb\\C[1]rope\\fb\\C[0] broke immediately before the man was \\fb\\C[1]crushed\\fb\\C[0].\n" +
+            let text = "\\fs[24]- The \\fb\\C[1]blood splatter\\fb\\C[0] occured immediately after the man was\n  \\fb\\C[1]smashed\\fb\\C[0].\n" +
+            "- The \\fb\\C[1]rope\\fb\\C[0] broke immediately before the man was \\fb\\C[1]smashed\\fb\\C[0].\n" +
             "- The \\fb\\C[1]dirt\\fb\\C[0] being tracked in was the first event to occur.\n" +
             "- The \\fb\\C[1]wallet\\fb\\C[0] was on the floor before the \\fb\\C[1]blood\\fb\\C[0] was\n  splattered.\n";
 
@@ -96,7 +96,7 @@ class Drag_3 {
 
             height_ += 246;
             this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Cloth", ((Graphics.width/7) - 47), height_);
-            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Crushed", ((2*Graphics.width/7) - 57), height_);
+            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Smashed", ((2*Graphics.width/7) - 57), height_);
             this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Blood", ((3*Graphics.width/7) - 44), height_);
             this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Footprints", ((4*Graphics.width/7) - 73), height_);
             this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Wallet", ((5*Graphics.width/7) - 48), height_);
