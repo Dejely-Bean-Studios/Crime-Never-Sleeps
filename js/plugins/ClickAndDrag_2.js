@@ -90,7 +90,7 @@ class Drag_2 {
             this._drag_window_2.drawTextEx("\\fb2am", ((2*Graphics.width/7) - 38), height_);
             this._drag_window_2.drawTextEx("\\fb3am", ((3*Graphics.width/7) - 38), height_);
             this._drag_window_2.drawTextEx("\\fb3am", ((4*Graphics.width/7) - 38), height_);
-            this._drag_window_2.drawTextEx("\\fb4am", ((5*Graphics.width/7) - 42), height_);
+            this._drag_window_2.drawTextEx("\\fb4am", ((5*Graphics.width/7) - 38), height_);
             this._drag_window_2.drawTextEx("\\fb?", ((6*Graphics.width/7) - 25), height_);
 
             height_ += 246;
