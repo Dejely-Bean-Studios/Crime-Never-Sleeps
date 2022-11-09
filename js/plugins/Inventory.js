@@ -30,51 +30,51 @@
  * 
  * @param clue1
  * @desc the description text for the clue
- * @default Cyrus made dinner
+ * @default Stove: Still has stains
  * 
  * @param clue2
  * @desc the description text for the clue
- * @default Cyrus did the dishes
+ * @default Dishes: Squeaky clean
  * 
  * @param clue3
  * @desc the description text for the clue
- * @default Cyrus died after falling
+ * @default Chalk Outline: My old friend
  * 
  * @param clue4
  * @desc the description text for the clue
- * @default Someone buzzed into the apartment
+ * @default Buzzer: Who was here?
  * 
  * @param clue5
  * @desc the description text for the clue
- * @default Cyrus watched TV
+ * @default TV: Caught in 4K
  * 
  * @param clue6
  * @desc the description text for the clue
- * @default Cyrus read a book
+ * @default Book: Looks well loved
  * 
  * @param clue7
  * @desc the description text for the clue
- * @default The fish are in a temporary tank
+ * @default New Tank: Fish were moved here
  * 
  * @param clue8
  * @desc the description text for the clue
- * @default A mop bucket was spilled
+ * @default Mop: Spilled by something
  * 
  * @param clue9
  * @desc the description text for the clue
- * @default A broken fish tank controller
+ * @default Regulator: A system gone awry
  * 
  * @param clue10
  * @desc the description text for the clue
- * @default A cracked fish tank
+ * @default Cracked Tank: A desperate attempt
  * 
  * @param clue11
  * @desc the description text for the clue
- * @default A TV full of static
+ * @default TV: Nothing but static
  * 
  * @param clue12
  * @desc the description text for the clue
- * @default You were kicked out
+ * @default Unknown: You were kicked out
  * 
  * @param clue13
  * @desc the description text for the clue
@@ -82,11 +82,11 @@
  * 
  * @param clue14
  * @desc the description text for the clue
- * @default Rope: broken and deadly
+ * @default Rope: Broken and deadly
  * 
  * @param clue15
  * @desc the description text for the clue
- * @default Wallet: Leather, filled with cash
+ * @default Wallet: Leather, full of cash
  * 
  * @param clue16
  * @desc the description text for the clue
@@ -124,10 +124,6 @@
  * @desc the description text for the clue
  * @default Glass: Another entrance?
  */
-
-
-// TODO add items for the new murders, finish writing last descriptions
-// TODO make the page it's on based on the murder
 
 var Inventory = Inventory || {};
 
