@@ -78,51 +78,51 @@
  * 
  * @param clue13
  * @desc the description text for the clue
- * @default A scrap of brown cloth
+ * @default Cloth: A suspicious scrap
  * 
  * @param clue14
  * @desc the description text for the clue
- * @default A frayed rope
+ * @default Rope: broken and deadly
  * 
  * @param clue15
  * @desc the description text for the clue
- * @default A wallet
+ * @default Wallet: Leather, filled with cash
  * 
  * @param clue16
  * @desc the description text for the clue
- * @default Dirty boot prints
+ * @default Dirt: Tracked in by boots
  * 
  * @param clue17
  * @desc the description text for the clue
- * @default Blood splattered on the piano machine
+ * @default Splatter: A blotch of blood
  * 
  * @param clue18
  * @desc the description text for the clue
- * @default A man crushed by a piano
+ * @default Dead Man: A smashed corpse
  * 
  * @param clue19
  * @desc the description text for the clue
- * @default An interrogation camera
+ * @default Camera: Tapes interrogations
  * 
  * @param clue20
  * @desc the description text for the clue
- * @default 
+ * @default Lock: Records entries
  * 
  * @param clue21
  * @desc the description text for the clue
- * @default Finn covered in blood
+ * @default Finn: A warm, bloody corpse
  * 
  * @param clue22
  * @desc the description text for the clue
- * @default An open vent
+ * @default Vent: Brings in fresh air
  * 
  * @param clue23
  * @desc the description text for the clue
- * @default 
+ * @default Table: A hiding place?
  * 
  * @param clue24
  * @desc the description text for the clue
- * @default An unhinged window
+ * @default Glass: Another entrance?
  */
 
 
