@@ -43,7 +43,7 @@ class Drag_1 {
 
             this.frames = 0;
 
-            $gameSwitches.setValue(20, false);
+            $gameSwitches.setValue(56, false);
         }
         Scene_drag.prototype = Object.create(Scene_MenuBase.prototype);
         this.scene_drag = (Scene_drag.prototype.constructor = Scene_drag);
@@ -271,7 +271,7 @@ class Drag_1 {
                 this.button.scale.x = 1.1;
                 this.button.scale.y = 1.1;
 
-                if (TouchInput.isTriggered()) {
+                if (TouchInput.isTriggered() && !this.clicked) {
                     let right_answers = 0;
                     if ((this.items[0].x == this.shadow_boxes[1].x) && (this.items[0].y == this.shadow_boxes[1].y)){
                         right_answers += 1;
@@ -293,13 +293,14 @@ class Drag_1 {
                     }
 
                     if (right_answers == 6) {
-                        $gameSwitches.setValue(20, true);
+                        $gameSwitches.setValue(56, true);
                         SceneManager.pop();
                     } else {
                         this._score_window = this._score_window = new Window_Drag(0, 0, Graphics.width, (3/8)*Graphics.height - 10);
                         this.addWindow(this._score_window);
                         this._score_window.drawText("You've correctly identified " + String(right_answers) + " event" + ((right_answers == 1) ? "." : "s."), 0, 50, Graphics.width, "center");
                         this.frames = 0;
+                        this.clicked = true;
                     }
                 }
             } else {
@@ -308,6 +309,7 @@ class Drag_1 {
             }
             if (this.frames == 100) {
                 this._windowLayer.removeChild(this._score_window);
+                this.clicked = false;
             }
         }
 
