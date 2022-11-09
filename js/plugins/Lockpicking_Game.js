@@ -2720,7 +2720,7 @@ Game_Interpreter.prototype.pluginCommand = function(command, args) {
     if(command === "lockpick_2") SceneManager.push(lockpick_menu_12.get_scene_lockpick());
     if(command === "lockpick_3") SceneManager.push(lockpick_menu_13.get_scene_lockpick());
     if(command === "lockpick_4") SceneManager.push(lockpick_menu_14.get_scene_lockpick());
-    if(command === "lockpick_5") SceneManager.push(lockpick_menu_14.get_scene_lockpick());
+    if(command === "lockpick_5") SceneManager.push(lockpick_menu_15.get_scene_lockpick());
 };
 
 TouchInput._onMouseMove = function(event) {
