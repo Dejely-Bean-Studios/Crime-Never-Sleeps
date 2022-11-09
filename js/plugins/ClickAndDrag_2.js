@@ -16,7 +16,7 @@
  * ClickAndDrag_2
  */
 
-Input.keyMapper["70"] = "drag_2"; //d
+//Input.keyMapper["70"] = "drag_2";
 
 class Drag_2 {
     constructor() {
@@ -66,7 +66,7 @@ class Drag_2 {
             this.bit_control = create_bitmap("img/pictures/", "control");
             this.bit_fishtank = create_bitmap("img/pictures/", "fishtank");
             this.bit_tvstatic = create_bitmap("img/pictures/", "tvstatic");
-            this.bit_black_question = create_bitmap("img/pictures/", "black_question");// TODO change this
+            this.bit_black_question = create_bitmap("img/pictures/", "black_question");
             this.bit_text_box = create_bitmap("img/pictures/", "box");
             this.bit_check = create_bitmap("img/pictures/", "check")
 
@@ -77,7 +77,6 @@ class Drag_2 {
             this._drag_window_2.opacity = 0;
 
             // draw text
-            // TODO change text
             let text = "\\fs[23]- The fish were moved to the \\fb\\C[1]new temporary tank\\fb\\C[0] before the victim\n  made a crack in the \\fb\\C[1]aquarium\\fb\\C[0].\n" +
             "- The \\fb\\C[1]TV\\fb\\C[0] and the \\fb\\C[1]Regulation Device\\fb\\C[0] malfunctioned at the same time.\n" +
             "- The \\fb\\C[1]mop bucket\\fb\\C[0] spilled right before the two devices failed.\n" +
@@ -270,7 +269,7 @@ class Drag_2 {
             (this.button.y - 25 < TouchInput.y) && (TouchInput.y < this.button.y + 25) && this.grab.every((element) => element == false)) {
                 this.button.scale.x = 1.1;
                 this.button.scale.y = 1.1;
-                // TODO change this
+
                 if (TouchInput.isTriggered() && !this.clicked) {
                     let right_answers = 0;
                     if (((this.items[0].x == this.shadow_boxes[2].x) && (this.items[0].y == this.shadow_boxes[2].y)) || ((this.items[0].x == this.shadow_boxes[3].x) && (this.items[0].y == this.shadow_boxes[3].y))){

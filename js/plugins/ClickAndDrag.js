@@ -16,7 +16,7 @@
  * ClickAndDrag_1
  */
 
-//Input.keyMapper["68"] = "drag_1"; //d
+//Input.keyMapper["68"] = "drag_1";
 
 class Drag_1 {
     constructor() {
