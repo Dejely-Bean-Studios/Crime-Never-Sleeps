@@ -1,10 +1,10 @@
 //=============================================================================
-// ClickAndDrag.js
+// ClickAndDrag_2.js
 //=============================================================================
 
 /*:
- * @plugindesc Association Puzzle 1
- * @author Danic Crispin
+ * @plugindesc Association Puzzle 2
+ * @author Danic Crispin and Ethan Chung
  *
  * 
  *
@@ -13,25 +13,25 @@
  *
  * To activate the menu through an event, create a plugin event
  * and type in:
- * ClickAndDrag_1
+ * ClickAndDrag_2
  */
 
-//Input.keyMapper["68"] = "drag_1";
+//Input.keyMapper["70"] = "drag_2";
 
-class Drag_1 {
+class Drag_2 {
     constructor() {
         this.init_scene();
     }
     init_scene() {
         function Scene_drag() {
             Scene_MenuBase.prototype.initialize.call(this);
-            this.grab_oven = false;
-            this.grab_tv = false;
-            this.grab_book = false;
-            this.grab_dishes = false;
-            this.grab_door = false;
-            this.grab_dead = false;
-            this.grab = [this.grab_oven, this.grab_tv, this.grab_book, this.grab_dishes, this.grab_door, this.grab_dead];
+            this.grab_aquarium = false;
+            this.grab_bucket = false;
+            this.grab_control = false;
+            this.grab_fishtank = false;
+            this.grab_tvstatic = false;
+            this.grab_black_question = false;
+            this.grab = [this.grab_aquarium, this.grab_bucket, this.grab_control, this.grab_fishtank, this.grab_tvstatic, this.grab_black_question];
 
             this.box_1_occupied = false;
             this.box_2_occupied = false;
@@ -43,7 +43,7 @@ class Drag_1 {
 
             this.frames = 0;
 
-            $gameSwitches.setValue(56, false);
+            $gameSwitches.setValue(57, false);
         }
         Scene_drag.prototype = Object.create(Scene_MenuBase.prototype);
         this.scene_drag = (Scene_drag.prototype.constructor = Scene_drag);
@@ -61,12 +61,12 @@ class Drag_1 {
 
             // get images from files
             this.bit_box = create_bitmap("img/pictures/", "box_base");
-            this.bit_book = create_bitmap("img/pictures/", "book");
-            this.bit_tv = create_bitmap("img/pictures/", "tv");
-            this.bit_oven = create_bitmap("img/pictures/", "oven");
-            this.bit_dishes = create_bitmap("img/pictures/", "dishes");
-            this.bit_dead = create_bitmap("img/pictures/", "dead");
-            this.bit_buzzer = create_bitmap("img/pictures/", "buzzer");
+            this.bit_aquarium = create_bitmap("img/pictures/", "aquarium");
+            this.bit_bucket = create_bitmap("img/pictures/", "bucket");
+            this.bit_control = create_bitmap("img/pictures/", "control");
+            this.bit_fishtank = create_bitmap("img/pictures/", "fishtank");
+            this.bit_tvstatic = create_bitmap("img/pictures/", "tvstatic");
+            this.bit_black_question = create_bitmap("img/pictures/", "black_question");
             this.bit_text_box = create_bitmap("img/pictures/", "box");
             this.bit_check = create_bitmap("img/pictures/", "check")
 
@@ -77,30 +77,29 @@ class Drag_1 {
             this._drag_window_2.opacity = 0;
 
             // draw text
-            let text = "\\fs[23]- At 11PM, Cyrus was \\fb\\C[1]pushed/fell\\fb\\C[0] out of the apartment.\n" +
-            "- Cyrus washed the \\fb\\C[1]dishes\\fb\\C[0] sometime after he made dinner.\n" +
-            "- Cyrus read a \\fb\\C[1]book\\fb\\C[0] sometime before he made dinner.\n" +
-            "- Cyrus never watches \\fb\\C[1]TV\\fb\\C[0] immediately after he washes the dishes.\n" +
-            "- Cyrus' wife mentions that he was\\fi extremely\\fi particular about\n  washing the \\fb\\C[1]dishes\\fb\\C[0] at 8pm, and he never failed to do so.\n\n";
+            let text = "\\fs[23]- The fish were moved to the \\fb\\C[1]new temporary tank\\fb\\C[0] before the victim\n  made a crack in the \\fb\\C[1]aquarium\\fb\\C[0].\n" +
+            "- The \\fb\\C[1]TV\\fb\\C[0] and the \\fb\\C[1]Regulation Device\\fb\\C[0] malfunctioned at the same time.\n" +
+            "- The \\fb\\C[1]mop bucket\\fb\\C[0] spilled right before the two devices failed.\n" +
+            "- The \\fb\\C[1]unknown event\\fb\\C[0] occured at an unknown time, but after all the\n  events occured\n";
 
             this._drag_window_1.drawTextEx(text, 5, -5);
             this._drag_window_2.drawTextEx("\\fs[23]\\C[2]With this in mind, what is a timeline of the events that occurred?\\C[0]", 6, -5);
 
             let height_ = (3.2/11)*((5/8)*(Graphics.height) + 10) - 40;
-            this._drag_window_2.drawTextEx("\\fb6pm", ((Graphics.width/7) - 38), height_);
-            this._drag_window_2.drawTextEx("\\fb7pm", ((2*Graphics.width/7) - 38), height_);
-            this._drag_window_2.drawTextEx("\\fb8pm", ((3*Graphics.width/7) - 38), height_);
-            this._drag_window_2.drawTextEx("\\fb9pm", ((4*Graphics.width/7) - 38), height_);
-            this._drag_window_2.drawTextEx("\\fb10pm", ((5*Graphics.width/7) - 42), height_);
-            this._drag_window_2.drawTextEx("\\fb11pm", ((6*Graphics.width/7) - 42), height_);
+            this._drag_window_2.drawTextEx("\\fb1am", ((Graphics.width/7) - 38), height_);
+            this._drag_window_2.drawTextEx("\\fb2am", ((2*Graphics.width/7) - 38), height_);
+            this._drag_window_2.drawTextEx("\\fb3am", ((3*Graphics.width/7) - 38), height_);
+            this._drag_window_2.drawTextEx("\\fb3am", ((4*Graphics.width/7) - 38), height_);
+            this._drag_window_2.drawTextEx("\\fb4am", ((5*Graphics.width/7) - 38), height_);
+            this._drag_window_2.drawTextEx("\\fb?", ((6*Graphics.width/7) - 25), height_);
 
             height_ += 246;
-            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Dinner", ((Graphics.width/7) - 49), height_);
-            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]TV", ((2*Graphics.width/7) - 31), height_);
-            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Reading", ((3*Graphics.width/7) - 55), height_);
-            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Dishes", ((4*Graphics.width/7) - 50), height_);
-            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Door Bell", ((5*Graphics.width/7) - 64), height_);
-            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Death", ((6*Graphics.width/7) - 44), height_);
+            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Regulator", ((Graphics.width/7) - 67), height_);
+            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Mop Bucket", ((2*Graphics.width/7) - 72), height_);
+            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Aquarium", ((3*Graphics.width/7) - 62), height_);
+            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]New Tank", ((4*Graphics.width/7) - 60), height_);
+            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Unknown", ((5*Graphics.width/7) - 57), height_);
+            this._drag_window_2.drawTextEx("\\fb\\fs[22]\\C[1]Static TV", ((6*Graphics.width/7) - 65), height_);
 
 
             // create sprites
@@ -160,36 +159,36 @@ class Drag_1 {
 
             this.box_1 = new My_Sprite(this.bit_box, (Graphics.width/7), height_box, 0.5, 0.5);
             this.addChild(this.box_1);
-            this.oven = new My_Sprite(this.bit_oven, (Graphics.width/7), height_box, 0.5, 0.5);
-            this.addChild(this.oven);
+            this.control = new My_Sprite(this.bit_control, (Graphics.width/7), height_box, 0.5, 0.5);
+            this.addChild(this.control);
 
             this.box_2 = new My_Sprite(this.bit_box, (2*Graphics.width/7), height_box, 0.5, 0.5);
             this.addChild(this.box_2);
-            this.tv = new My_Sprite(this.bit_tv, (2*Graphics.width/7), height_box, 0.5, 0.5);
-            this.addChild(this.tv);
+            this.bucket = new My_Sprite(this.bit_bucket, (2*Graphics.width/7), height_box, 0.5, 0.5);
+            this.addChild(this.bucket);
 
             this.box_3 = new My_Sprite(this.bit_box, (3*Graphics.width/7), height_box, 0.5, 0.5);
             this.addChild(this.box_3);
-            this.book = new My_Sprite(this.bit_book, (3*Graphics.width/7), height_box, 0.5, 0.5);
-            this.addChild(this.book);
+            this.aquarium = new My_Sprite(this.bit_aquarium, (3*Graphics.width/7), height_box, 0.5, 0.5);
+            this.addChild(this.aquarium);
 
             this.box_4 = new My_Sprite(this.bit_box, (4*Graphics.width/7), height_box, 0.5, 0.5);
             this.addChild(this.box_4);
-            this.dishes = new My_Sprite(this.bit_dishes, (4*Graphics.width/7), height_box, 0.5, 0.5);
-            this.addChild(this.dishes);
+            this.fishtank = new My_Sprite(this.bit_fishtank, (4*Graphics.width/7), height_box, 0.5, 0.5);
+            this.addChild(this.fishtank);
 
             this.box_5 = new My_Sprite(this.bit_box, (5*Graphics.width/7), height_box, 0.5, 0.5);
             this.addChild(this.box_5);
-            this.door = new My_Sprite(this.bit_buzzer, (5*Graphics.width/7), height_box, 0.5, 0.5);
-            this.addChild(this.door);
+            this.black_question = new My_Sprite(this.bit_black_question, (5*Graphics.width/7), height_box, 0.5, 0.5);
+            this.addChild(this.black_question);
 
             this.box_6 = new My_Sprite(this.bit_box, (6*Graphics.width/7), height_box, 0.5, 0.5);
             this.addChild(this.box_6);
-            this.dead = new My_Sprite(this.bit_dead, (6*Graphics.width/7), height_box, 0.5, 0.5);
-            this.addChild(this.dead);
+            this.tvstatic = new My_Sprite(this.bit_tvstatic, (6*Graphics.width/7), height_box, 0.5, 0.5);
+            this.addChild(this.tvstatic);
 
             this.boxes = [this.box_1, this.box_2, this.box_3, this.box_4, this.box_5, this.box_6];
-            this.items = [this.oven, this.tv, this.book, this.dishes, this.door, this.dead];
+            this.items = [this.control, this.bucket, this.aquarium, this.fishtank, this.black_question, this.tvstatic];
             this.boxes_x = [(Graphics.width/7), (2*Graphics.width/7), (3*Graphics.width/7), (4*Graphics.width/7), (5*Graphics.width/7), (6*Graphics.width/7)];
             this.boxes_y = [height_box, height_box, height_box, height_box, height_box, height_box];
 
@@ -273,27 +272,27 @@ class Drag_1 {
 
                 if (TouchInput.isTriggered() && !this.clicked) {
                     let right_answers = 0;
-                    if ((this.items[0].x == this.shadow_boxes[1].x) && (this.items[0].y == this.shadow_boxes[1].y)){
+                    if (((this.items[0].x == this.shadow_boxes[2].x) && (this.items[0].y == this.shadow_boxes[2].y)) || ((this.items[0].x == this.shadow_boxes[3].x) && (this.items[0].y == this.shadow_boxes[3].y))){
                         right_answers += 1;
                     }
-                    if ((this.items[1].x == this.shadow_boxes[4].x) && (this.items[1].y == this.shadow_boxes[4].y)){
+                    if ((this.items[1].x == this.shadow_boxes[1].x) && (this.items[1].y == this.shadow_boxes[1].y)){
                         right_answers += 1;
                     }
-                    if ((this.items[2].x == this.shadow_boxes[0].x) && (this.items[2].y == this.shadow_boxes[0].y)){
+                    if ((this.items[2].x == this.shadow_boxes[4].x) && (this.items[2].y == this.shadow_boxes[4].y)){
                         right_answers += 1;
                     }
-                    if ((this.items[3].x == this.shadow_boxes[2].x) && (this.items[3].y == this.shadow_boxes[2].y)) {
+                    if ((this.items[3].x == this.shadow_boxes[0].x) && (this.items[3].y == this.shadow_boxes[0].y)) {
                         right_answers += 1;
                     }
-                    if ((this.items[4].x == this.shadow_boxes[3].x) && (this.items[4].y == this.shadow_boxes[3].y)){
+                    if ((this.items[4].x == this.shadow_boxes[5].x) && (this.items[4].y == this.shadow_boxes[5].y)){
                         right_answers += 1;
                     }
-                    if ((this.items[5].x == this.shadow_boxes[5].x) && (this.items[5].y == this.shadow_boxes[5].y)){
+                    if (((this.items[5].x == this.shadow_boxes[2].x) && (this.items[5].y == this.shadow_boxes[2].y)) || ((this.items[5].x == this.shadow_boxes[3].x) && (this.items[5].y == this.shadow_boxes[3].y))){
                         right_answers += 1;
                     }
 
                     if (right_answers == 6) {
-                        $gameSwitches.setValue(56, true);
+                        $gameSwitches.setValue(57, true);
                         SceneManager.pop();
                     } else {
                         this._score_window = this._score_window = new Window_Drag(0, 0, Graphics.width, (3/8)*Graphics.height - 10);
@@ -345,18 +344,18 @@ My_Sprite.prototype = Object.create(Sprite_Button.prototype);
 My_Sprite.prototype.constructor = My_Sprite;
 
 
-let drag_1 = new Drag_1();
+let drag_2 = new Drag_2();
 
-_alias_scene_map_update_2 = Scene_Map.prototype.update;
+_alias_scene_map_update_drag_2 = Scene_Map.prototype.update;
 Scene_Map.prototype.update = function() {
-    _alias_scene_map_update_2.call(this);
-    if (Input.isTriggered("drag_1")) SceneManager.push(drag_1.get_scene_drag());
+    _alias_scene_map_update_drag_2.call(this);
+    if (Input.isTriggered("drag_2")) SceneManager.push(drag_2.get_scene_drag());
 }
 
-_alias_custom_pluginCommand_drag = Game_Interpreter.prototype.pluginCommand;
+_alias_custom_pluginCommand_drag_2 = Game_Interpreter.prototype.pluginCommand;
 Game_Interpreter.prototype.pluginCommand = function(command, args) {
-    _alias_custom_pluginCommand_drag.call(this, command, args);
-    if(command === "ClickAndDrag_1") SceneManager.push(drag_1.get_scene_drag());
+    _alias_custom_pluginCommand_drag_2.call(this, command, args);
+    if(command === "ClickAndDrag_2") SceneManager.push(drag_2.get_scene_drag());
 };
 
 TouchInput._onMouseMove = function(event) {
