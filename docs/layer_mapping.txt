@@ -46,3 +46,23 @@ LAYER_S 29 factory_objects_night 0 0 0 1 0
 LAYER_S 30 factory_overlay_night 0 0 0 5 0
 LAYER_S 31 factory_cloth_day 0 0 0 5 0
 
+---
+
+LAYER_S 32 lobby_background_day 0 0 255 0 0
+LAYER_S 33 lobby_objects_day 0 0 255 1 0
+LAYER_S 34 lobby_overlay_day 0 0 255 5 0
+
+---
+
+LAYER_S 35 room_background_day 0 0 255 0 0
+LAYER_S 36 room_objects_day 0 0 0 1 0
+LAYER_S 37 room_objects_day_nobody 0 0 255 1 0
+LAYER_S 38 room_overlay_day 0 0 255 5 0
+
+---
+
+
+
+
+
+
