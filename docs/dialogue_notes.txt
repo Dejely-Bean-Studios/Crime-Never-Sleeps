@@ -9,18 +9,21 @@
 \.: wait 1/4 second
 \|: wait 1 second
 \!: wait for button input
-
+ 
 \{: Increases the text size by one step.
 \}: Decreases the text size by one step.
 
 \SE[1]: Detective sound
 \SE[2]: Secretary (Daphne) sound
+\SE[3]: Rellik sound
+\SE[4]: Finn sound
+\SE[5]: Flora sound
 
 \n<Joe>\SE[1]: Joe start
 \n<Daphne>\SE[2]: Daphne start
-\n<Finn>: Finn start
-\n<Flora>: Flora start
-\n<Rellik>: Rellik start
+\n<Finn>\SE[4]: Finn start
+\n<Flora>\SE[5]: Flora start
+\n<Rellik>\SE[3]: Rellik start
 
 \. . \. . \. .: Dramatic pause
 

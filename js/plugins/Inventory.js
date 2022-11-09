@@ -145,8 +145,6 @@ var inventory_background = 'notebook'
 
 var notebook_page = 0
 
-ImageManager.reservePicture(inventory_background)
-
 var picture_ID = 14
 
 var inventory_width = 315
@@ -182,6 +180,7 @@ Scene_Inventory.prototype.constructor = Scene_Inventory;
 
 Scene_Inventory.prototype.initialize = function() {
     Scene_MenuBase.prototype.initialize.call(this);
+    ImageManager.reservePicture(inventory_background)
     ImageManager.reserveFace('inventoryclues1')
     ImageManager.reserveFace('inventoryclues2')
     ImageManager.reserveFace('inventoryclues3')
