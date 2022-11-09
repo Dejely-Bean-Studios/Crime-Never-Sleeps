@@ -28,6 +28,8 @@
  * 
  * lockpick_4
  * 
+ * lockpick_5
+ * 
 */
 
 
@@ -1618,7 +1620,6 @@ class Lockpick_menu_13 {
     }
 }
 
-
 class Lockpick_menu_14 {
     constructor() {
         this.init_scene();
@@ -1664,6 +1665,320 @@ class Lockpick_menu_14 {
 
                 if (this.counter >= 100) {
                     $gameSwitches.setValue(55, true);
+                    SceneManager.pop();
+                }
+            } else {
+
+                // rotate mirrors
+                let step = Math.PI/32;
+                this.rotate_mirror(this.mirror_1, step, -4*Math.PI/32, 4*Math.PI/32);
+                this.rotate_mirror(this.mirror_2, step, 12*Math.PI/32, 20*Math.PI/32);
+                //this.rotate_mirror(this.mirror_3, step, -21*Math.PI/32, -11*Math.PI/32);
+                //this.rotate_mirror(this.mirror_4, step, -37*Math.PI/32, -29*Math.PI/32);
+                
+                // update mirrors
+                this.mirrors.forEach(mirror => {
+                    mirror.update_self();
+                });
+
+                // update lasers
+                this.lasers.forEach(laser => {
+                    this.update_laser(laser);
+                });
+
+                // update sensors
+                this.sensors.forEach(sensor => {
+                    sensor.update_self();
+                    this.update_sensor(sensor);
+                });
+
+                if(this.sensor_1.detected && this.sensor_2.detected) {
+                    this.game_finished = true;
+
+                    this.mirrors.forEach(mirror => {
+                        mirror.scale.x = 1;
+                        mirror.children.forEach(child => {
+                            child.visible = false;
+                        });
+                    });
+                }
+            }
+            //console.log(this.laser_1.scale.x);
+        };
+
+        this.scene_lockpick.prototype.create = function() {
+            Scene_MenuBase.prototype.create.call(this);
+
+            // create window
+            this._lockpick_window_0 = new Window_Lockpick(0, 0, Graphics.width, Graphics.height);
+            this.addWindow(this._lockpick_window_0);
+
+            // get images from files
+            this.bit_laser_red = create_bitmap("img/pictures/", "laser_red_h");
+            this.bit_laser_blue = create_bitmap("img/pictures/", "laser_blue_h");
+            this.bit_laser_green = create_bitmap("img/pictures/", "laser_green_h");
+            this.bit_laser_yellow = create_bitmap("img/pictures/", "laser_yellow_h");
+
+            this.bit_sensor_red = create_bitmap("img/pictures/", "sensor_red");
+            this.bit_sensor_blue = create_bitmap("img/pictures/", "sensor_blue");
+            this.bit_sensor_green = create_bitmap("img/pictures/", "sensor_green");
+            this.bit_sensor_yellow = create_bitmap("img/pictures/", "sensor_yellow");
+
+            this.bit_prism = create_bitmap("img/pictures/", "laser_combined");
+
+            this.bit_base = create_bitmap("img/pictures/", "sensor_base");
+
+            this.bit_box_base = create_bitmap("img/pictures/", "box_base");
+            this.bit_box_mirror = create_bitmap("img/pictures/", "box_mirror_2");
+            //his.bit_box_mirror_2 = create_bitmap("img/pictures/", "box_mirror");
+            
+            this.bit_mirror = create_bitmap("img/pictures/", "mirror");
+            this.bit_arrow_left = create_bitmap("img/pictures/", "arrow_left");
+            this.bit_arrow_right = create_bitmap("img/pictures/", "arrow_right");
+
+
+            // create sprites
+            // lasers
+            this.lasers = [];
+            this.laser_1 = new Laser_Sprite(this.bit_laser_yellow, Graphics.width/2 - 50, 0, -1*Math.PI/2);
+            this._lockpick_window_0.addChild(this.laser_1);
+            this.lasers.push(this.laser_1);
+
+            this.laser_2 = new Laser_Sprite(this.bit_laser_green, 0, 350, 0);
+            this._lockpick_window_0.addChild(this.laser_2);
+            this.lasers.push(this.laser_2);
+
+            // base or sensors
+            this.sensors = [];
+            this.sensor_1 = new sprite_sensor(this.bit_sensor_yellow, this.bit_laser_yellow, 463, 0, 0);
+            this._lockpick_window_0.addChild(this.sensor_1);
+            this.sensors.push(this.sensor_1);
+
+            this.sensor_2 = new sprite_sensor(this.bit_sensor_green, this.bit_laser_green, 0, 160, Math.PI/2);
+            this._lockpick_window_0.addChild(this.sensor_2);
+            this.sensors.push(this.sensor_2);
+
+            this.base_1 = new sprite(this.bit_base, this.laser_1.x, this.laser_1.y, 0, 0.5, 0);
+            this._lockpick_window_0.addChild(this.base_1);
+
+            this.base_2 = new sprite(this.bit_base, this.laser_2.x, this.laser_2.y, Math.PI/2, 0.5, 0);
+            this._lockpick_window_0.addChild(this.base_2);
+
+
+            // mirrors
+            this.mirrors = [];
+            let angle_1 = 0;
+            this.mirror_1 = new sprite(this.bit_mirror, Graphics.width/2 - 50, Graphics.height - 40, angle_1);
+            this._lockpick_window_0.addChild(this.mirror_1);
+            this.mirrors.push(this.mirror_1);
+
+            this.add_child(this.mirror_1, new sprite(this.bit_arrow_right, this.mirror_1.x, this.mirror_1.y, this.mirror_1.angle, 0, 0.5));
+            this.add_child(this.mirror_1, new sprite(this.bit_arrow_left, this.mirror_1.x, this.mirror_1.y, this.mirror_1.angle, 1, 0.5));
+
+
+
+            let angle_2 = 16*Math.PI/32;
+            this.mirror_2 = new sprite(this.bit_mirror, Graphics.width - 40, 350, angle_2);
+            this._lockpick_window_0.addChild(this.mirror_2);
+            this.mirrors.push(this.mirror_2);
+
+            this.add_child(this.mirror_2, new sprite(this.bit_arrow_right, this.mirror_2.x, this.mirror_2.y, this.mirror_2.angle, 0, 0.5));
+            this.add_child(this.mirror_2, new sprite(this.bit_arrow_left, this.mirror_2.x, this.mirror_2.y, this.mirror_2.angle, 1, 0.5));
+
+            /*let angle_3 = -19*Math.PI/32;//2*Math.PI/5;
+            this.mirror_3 = new sprite(this.bit_mirror, 50, 346, angle_3);
+            this._lockpick_window_0.addChild(this.mirror_3);
+            this.mirrors.push(this.mirror_3);
+
+            this.add_child(this.mirror_3, new sprite(this.bit_arrow_right, this.mirror_3.x, this.mirror_3.y, this.mirror_3.angle, 0, 0.5));
+            this.add_child(this.mirror_3, new sprite(this.bit_arrow_left, this.mirror_3.x, this.mirror_3.y, this.mirror_3.angle, 1, 0.5));
+
+
+            let angle_4 = -31*Math.PI/32;//2*Math.PI/5;
+            this.mirror_4 = new sprite(this.bit_mirror, 257, 31, angle_4);
+            this._lockpick_window_0.addChild(this.mirror_4);
+            this.mirrors.push(this.mirror_4);
+
+            this.add_child(this.mirror_4, new sprite(this.bit_arrow_right, this.mirror_4.x, this.mirror_4.y, this.mirror_4.angle, 0, 0.5));
+            this.add_child(this.mirror_4, new sprite(this.bit_arrow_left, this.mirror_4.x, this.mirror_4.y, this.mirror_4.angle, 1, 0.5));*/
+        };
+
+        this.scene_lockpick.prototype.update_laser = function(laser, object = null) {
+            laser.update_self();
+    
+            for (let i = 0; i < this.mirrors.length; i++) {
+                this.mirrors[i].update_self();
+                if (this.mirrors[i] != object) {
+
+                    if (laser_intersect(laser, this.mirrors[i])) {
+                        //console.log(1);
+                        let point = laser_intersection_point(laser, this.mirrors[i]);
+                        //console.log(point);
+                        let arr = scale_x_laser(laser, point);
+                        let scale_temp = arr[0], L_temp = arr[1];
+        
+                        if (scale_temp < laser.scale.x) {
+                            laser.scale.x = scale_temp;
+                            laser.L = L_temp;
+                            laser.point_2 = point;
+                            //console.log(point);
+                            //this.remove_children(laser);
+
+                            let angle = get_reflection(laser, this.mirrors[i]);
+                            if (this.mirrors[i] == this.mirror_4) angle = angle + Math.PI;
+                            //console.log(angle/Math.PI);
+                            let child = new Laser_Sprite(laser.bitmap, laser.point_2.x, laser.point_2.y, angle);
+                            this.add_child(laser, child);
+                            this.update_laser(child, this.mirrors[i]);
+
+                        } else {
+                            this.remove_children(laser);
+                        }
+                    }
+                }
+            }
+        }
+
+        this.scene_lockpick.prototype.add_child = function (laser, child) {
+            laser.add_child(child);
+            let index = this._lockpick_window_0.children.indexOf(laser) + 1;
+            this._lockpick_window_0.addChildAt(child, index);
+        }
+
+        this.scene_lockpick.prototype.remove_children = function (laser) {
+            for (let i = 0; i < laser.children.length; i++) {
+                this.remove_children(laser.children[i]);
+                this._lockpick_window_0.removeChild(laser.children[i]);
+            }
+
+            laser.remove_children();
+        }
+
+        this.scene_lockpick.prototype.laser_rescale_y = function (laser, scale) {
+            laser.scale.y = scale;
+            laser.children.forEach(child => {
+                this.laser_rescale_y(child, scale);
+            });
+        }
+
+        this.scene_lockpick.prototype.rotate_mirror = function (mirror, step, min, max) {
+            let left = mirror.children[0], right = mirror.children[1];
+
+            if (in_rectangle_sprite(left)) {
+                left.visible = true;
+                right.visible = false;
+                mirror.scale.x = 1.1;
+
+                if (TouchInput.isTriggered()) {
+                    let angle = Math.max(mirror.angle - step, min);
+
+                    set_rotation(left, angle);
+                    set_rotation(right, angle);
+                    set_rotation(mirror, angle);
+
+                    this.lasers.forEach(laser => {
+                        this.remove_children(laser);
+                    });
+                }
+
+            } else if (in_rectangle_sprite(right)) {
+                left.visible = false;
+                right.visible = true;
+                mirror.scale.x = 1.1;
+
+                if (TouchInput.isTriggered()) {
+                    let angle = Math.min(mirror.angle + step, max);
+
+                    set_rotation(left, angle);
+                    set_rotation(right, angle);
+                    set_rotation(mirror, angle);
+
+                    this.lasers.forEach(laser => {
+                        this.remove_children(laser);
+                    });
+                }
+
+            } else {
+                left.visible = false;
+                right.visible = false;
+                mirror.scale.x = 1;
+            }
+        }
+
+        this.scene_lockpick.prototype.update_sensor = function (sensor) {
+            for (let i = 0; i < this.lasers.length; i++) {
+                if (this.sensor_laser_intersect(sensor, this.lasers[i]) == true) break;
+                else sensor.detected = false;
+            }
+        }
+
+        this.scene_lockpick.prototype.sensor_laser_intersect = function (sensor, laser) {
+            //console.log(laser);
+            if ((sensor.detect == laser.bitmap) && laser_intersect(laser, sensor)) {
+                sensor.detected = true;
+                return true;
+
+            } else {
+                for (let i = 0; i < laser.children.length; i++) {
+                    //console.log(laser.children, i);
+                    if (this.sensor_laser_intersect(sensor, laser.children[i])) return true;
+                }
+
+                return false;
+            }
+        }
+    }
+    
+    get_scene_lockpick() {
+        return this.scene_lockpick;
+    }
+}
+
+class Lockpick_menu_15 {
+    constructor() {
+        this.init_scene();
+    }
+    init_scene() {
+        function Scene_Lockpick_5() {
+            Scene_MenuBase.prototype.initialize.call(this);
+            this.tick = 0;
+            this.game_finished = false;
+            this.counter = 0;
+            $gameSwitches.setValue(59, false);
+        };
+        Scene_Lockpick_5.prototype = Object.create(Scene_MenuBase.prototype);
+        this.scene_lockpick = (Scene_Lockpick_5.prototype.constructor = Scene_Lockpick_5);
+
+
+        this.scene_lockpick.prototype.update = function() {
+            if (TouchInput.isTriggered()) console.log(TouchInput.x, TouchInput.y);
+
+            // frame counter
+            this.tick += 1;
+            this.tick %= 20;
+
+            if (this.tick == 10) {
+                let size = 1.1;
+                this.lasers.forEach(laser => {
+                    this.laser_rescale_y(laser, size);
+                });
+                //this.laser_1.scale.x = size;
+            } else if (this.tick == 0) {
+                let size = 1;
+                this.lasers.forEach(laser => {
+                    this.laser_rescale_y(laser, size);
+                });
+                //this.laser_1.scale.x = size;
+            }
+
+            // exits scene when esc key is pressed
+            if (Input.isTriggered("cancel")) SceneManager.pop();
+
+            if (this.game_finished) {
+                this.counter += 1;
+
+                if (this.counter >= 100) {
+                    $gameSwitches.setValue(59, true);
                     SceneManager.pop();
                 }
             } else {
@@ -2388,6 +2703,7 @@ let lockpick_menu_11 = new Lockpick_menu_11();
 let lockpick_menu_12 = new Lockpick_menu_12();
 let lockpick_menu_13 = new Lockpick_menu_13();
 let lockpick_menu_14 = new Lockpick_menu_14();
+let lockpick_menu_15 = new Lockpick_menu_15();
 
 _alias_scene_map_update = Scene_Map.prototype.update;
 Scene_Map.prototype.update = function() {
@@ -2404,6 +2720,7 @@ Game_Interpreter.prototype.pluginCommand = function(command, args) {
     if(command === "lockpick_2") SceneManager.push(lockpick_menu_12.get_scene_lockpick());
     if(command === "lockpick_3") SceneManager.push(lockpick_menu_13.get_scene_lockpick());
     if(command === "lockpick_4") SceneManager.push(lockpick_menu_14.get_scene_lockpick());
+    if(command === "lockpick_5") SceneManager.push(lockpick_menu_14.get_scene_lockpick());
 };
 
 TouchInput._onMouseMove = function(event) {
