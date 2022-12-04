@@ -20,7 +20,7 @@
  * Switches to activate clues must be sequential, switchStart can be changed to match the start number of the sequence
  * 
  * clue# can be changed to change the description of the clues
- *
+ * 
  * @param numClues
  * @desc The number of clues in the game
  * @default 6
@@ -126,7 +126,6 @@
  */
 
 // TODO make inventory be on the correct murder page initially
-// TODO inventory tutorial
 
 var Inventory = Inventory || {};
 
@@ -135,6 +134,7 @@ var parameters = PluginManager.parameters('Inventory');
 var back_blur = true;
 
 var selected_item = 0;
+
 // Map I to a command
 Input.keyMapper["73"] = "I";
 var clues = Number(parameters['numClues']);
@@ -144,13 +144,13 @@ var itemID = 0;
 
 var numMurders = 4;
 
-var inventory_background = 'notebook'
+var inventory_background = 'notebook';
 
-var notebook_page = 0
+var notebook_page = 0;
 
-var picture_ID = 14
+var picture_ID = 14;
 
-var inventory_width = 315
+var inventory_width = 315;
 
 ImageManager.reservePicture(inventory_background);
 
@@ -203,6 +203,9 @@ Scene_Inventory.prototype.initialize = function() {
 Scene_Inventory.prototype.create = function() {
     Scene_MenuBase.prototype.create.call(this);
     this.createMurderSelectWindow();
+    if ($gameSwitches.value(85)) {
+        this.createTutorialWindow(); 
+    }
     this.createInventoryWindow();
     if (this.inventory_activate) {
         this._inventorywindow.activate();
@@ -223,6 +226,9 @@ Scene_Inventory.prototype.update = function() {
         this.popScene();
         $gameScreen.clearPictures();
         back_blur = true;
+        if ($gameSwitches.value(85)) {
+            $gameSwitches.setValue(85, false);
+        }
     }
 }
 
@@ -242,6 +248,13 @@ Scene_Inventory.prototype.createInventoryWindow = function() {
     this._inventorywindow.deselect();
     this.addWindow(this._inventorywindow);
     this._murderselectwindow.setInventoryWindow(this._inventorywindow);
+}
+
+Scene_Inventory.prototype.createTutorialWindow = function() {
+    this._tutorialwindow = new Window_Base(5, 100, 225, 335);
+    this.addWindow(this._tutorialwindow);
+    var text = "\\fs[22]Use the \\C[1]arrow\nkeys\\C[0] to switch\npages. Hit \\C[3]enter\\C[0]\nto select a\nmurder and hit\n\\C[3]enter\\C[0] again for\nmore information\nabout a clue.\nUse \\C[18]escape\\C[0] to\nexit."
+    this._tutorialwindow.drawTextEx(text, 5, -5)
 }
 
 Scene_Inventory.prototype.onMurderOk = function() {
@@ -283,6 +296,9 @@ Scene_MoreInfo.prototype.initialize = function() {
 
 Scene_MoreInfo.prototype.create = function() {
     Scene_MenuBase.prototype.create.call(this);
+        if ($gameSwitches.value(85)) {
+            this.createTutorialWindow(); 
+        }
         this.windows["_item" + itemID] = new Window_MoreInfo(itemID);
         this.addWindow(this.windows["_item" + itemID]);
 };
@@ -301,6 +317,13 @@ Scene_MoreInfo.prototype.update = function() {
         $gameScreen.clearPictures();
         back_blur = true;
     }
+}
+
+Scene_MoreInfo.prototype.createTutorialWindow = function() {
+    this._tutorialwindow = new Window_Base(5, 100, 225, 335);
+    this.addWindow(this._tutorialwindow);
+    var text = "\\fs[22]Use the \\C[1]arrow\nkeys\\C[0] to switch\npages. Hit \\C[3]enter\\C[0]\nto select a\nmurder and hit\n\\C[3]enter\\C[0] again for\nmore information\nabout a clue.\nUse \\C[18]escape\\C[0] to\nexit."
+    this._tutorialwindow.drawTextEx(text, 5, -5)
 }
 
 Scene_MoreInfo.prototype.item = function() {
