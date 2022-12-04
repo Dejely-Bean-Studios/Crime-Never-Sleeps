@@ -125,6 +125,9 @@
  * @default Glass: Another entrance?
  */
 
+// TODO make inventory be on the correct murder page initially
+// TODO inventory tutorial
+
 var Inventory = Inventory || {};
 
 var parameters = PluginManager.parameters('Inventory');
@@ -148,6 +151,8 @@ var notebook_page = 0
 var picture_ID = 14
 
 var inventory_width = 315
+
+ImageManager.reservePicture(inventory_background);
 
 // Open the inventory on keypress
 _alias_map_update = Scene_Map.prototype.update;
