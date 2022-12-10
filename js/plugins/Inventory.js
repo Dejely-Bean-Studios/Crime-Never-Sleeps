@@ -28,6 +28,9 @@
  * @param switchStart
  * @desc the number at which the switches for the clues start
  * 
+ * @param tutorialSwitch
+ * @desc the switch to activate the tutorial
+ * 
  * @param clue1
  * @desc the description text for the clue
  * @default Stove: Still has stains
@@ -139,6 +142,8 @@ var selected_item = 0;
 Input.keyMapper["73"] = "I";
 var clues = Number(parameters['numClues']);
 
+var tutorial = Number(parameters['tutorialSwitch'])
+
 // Tracks which command is pressed and is used to display the correct image in more info
 var itemID = 0;
 
@@ -203,7 +208,7 @@ Scene_Inventory.prototype.initialize = function() {
 Scene_Inventory.prototype.create = function() {
     Scene_MenuBase.prototype.create.call(this);
     this.createMurderSelectWindow();
-    if ($gameSwitches.value(85)) {
+    if (!$gameSwitches.value(tutorial)) {
         this.createTutorialWindow(); 
     }
     this.createInventoryWindow();
@@ -226,8 +231,8 @@ Scene_Inventory.prototype.update = function() {
         this.popScene();
         $gameScreen.clearPictures();
         back_blur = true;
-        if ($gameSwitches.value(85)) {
-            $gameSwitches.setValue(85, false);
+        if (!$gameSwitches.value(tutorial)) {
+            $gameSwitches.setValue(tutorial, true);
         }
     }
 }
@@ -296,7 +301,7 @@ Scene_MoreInfo.prototype.initialize = function() {
 
 Scene_MoreInfo.prototype.create = function() {
     Scene_MenuBase.prototype.create.call(this);
-        if ($gameSwitches.value(85)) {
+        if (!$gameSwitches.value(tutorial)) {
             this.createTutorialWindow(); 
         }
         this.windows["_item" + itemID] = new Window_MoreInfo(itemID);
