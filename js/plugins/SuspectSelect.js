@@ -22,6 +22,11 @@ Game_Interpreter.prototype.pluginCommand = function(command, args) {
 
 var suspects = 6;
 
+var susID = 0; // TODO maybe change this
+
+const faces = ["faceset_cleanup", "faceset_cop", "faceset_detective", "faceset_secretary", "faceset_wife"];
+
+const names = ["Rellik", "Finn", "Joe", "Daphne", "Flora", "No One"];
 
 // ==================Scene========================
 function Scene_SuspectSelect() {
@@ -37,18 +42,29 @@ Scene_SuspectSelect.prototype.initialize = function() {
 
 Scene_SuspectSelect.prototype.create = function() {
     Scene_MenuBase.prototype.create.call(this);
-    this._muredererselectwindow = new Window_SuspectSelect();
-    for (var i = 0; i < clues * numMurders; i++) {
-        this._suspectselectwindow.setHandler("command" + i, this.moreInfo.bind(this, i));
+    this._suspectselectwindow = new Window_SuspectSelect();
+    for (var i = 0; i < suspects; i++) {
+        this._suspectselectwindow.setHandler("command" + i, this.confirm.bind(this, i));
     }
-    this.addWindow(this._muredererselectwindow)
+    this.addWindow(this._suspectselectwindow)
 }
 
 Scene_SuspectSelect.prototype.start = function() {
     Scene_MenuBase.prototype.start.call(this);
-    this._muredererselectwindow.refresh();
+    this._suspectselectwindow.refresh();
 }
 
+Scene_SuspectSelect.prototype.update = function() {
+    Scene_MenuBase.prototype.update.call(this);
+    if (Input.isTriggered('escape')) {
+        this.popScene();
+    }
+}
+
+Scene_SuspectSelect.prototype.confirm = function(susNum) {
+    susID = susNum;
+    SceneManager.push(Scene_Confirm);
+}
 
 // ----------------confirmation-----------------
 function Scene_Confirm() {
@@ -62,14 +78,16 @@ Scene_Confirm.prototype.initialize = function() {
     Scene_MenuBase.prototype.initialize.call(this);
 }
 
-Scene_Confirm.prototype.create = function() {
+Scene_Confirm.prototype.create = function() { // TODO add commands
     Scene_MenuBase.prototype.create.call(this);
+    this._confirmwindow = new Window_Confirm;
+    this.addWindow(this._confirmwindow);
 }
 
 Scene_Confirm.prototype.start = function() {
     Scene_MenuBase.prototype.start.call(this);
+    this._confirmwindow.refresh();
 }
-
 
 
 // =================Window========================
@@ -94,6 +112,8 @@ Window_SuspectSelect.prototype.makeCommandList = function() {
 
 Window_SuspectSelect.prototype.drawItem = function (index) {
     var itemRect = this.itemRect(index);
+    this.drawFace(faces[index], 0, itemRect.x + 10, itemRect.y - 5, itemRect.width - 20, itemRect.height - 20)
+    this.drawText(names[index], itemRect.x, itemRect.y + 150, itemRect.width, 'center')
 } 
 
 Window_SuspectSelect.prototype.maxCols = function () {
@@ -108,7 +128,7 @@ Window_SuspectSelect.prototype.maxPageRows = function () {
     return 2;
 }
 Window_SuspectSelect.prototype.windowHeight = function() {
-    return this.fittingHeight(this.numVisibleRows()) * 2;
+    return this.fittingHeight(this.numVisibleRows()) * 3.75;
 };
 
 Window_SuspectSelect.prototype.windowWidth = function() {
@@ -140,30 +160,18 @@ Window_Confirm.prototype.initialize = function() {
 }
 
 Window_Confirm.prototype.makeCommandList = function() {
-    // for (var i = 0; i < clues; i++) {
-    //     this.addCommand("Item" + (i + this.getClueStart()), "command" + (i + this.getClueStart()));
-    // }
+    this.addCommand("Yes", "Yes");
+    this.addCommand("No", "No");
 }
-
-Window_Confirm.prototype.drawItem = function (index) {
-    var itemRect = this.itemRect(index);
-} 
 
 Window_Confirm.prototype.maxCols = function () {
-    return 3;
+    return 2;
 }
 
-Window_HorzCommand.prototype.numVisibleRows = function() {
-    return 2;
+Window_Confirm.prototype.numVisibleRows = function() {
+    return 1;
 };
 
 Window_Confirm.prototype.maxPageRows = function () {
-    return 2;
+    return 1;
 }
-Window_Confirm.prototype.windowHeight = function() {
-    return this.fittingHeight(this.numVisibleRows()) * 2;
-};
-
-Window_Confirm.prototype.windowWidth = function() {
-    return this.windowHeight() * (3/this.numVisibleRows()) + 15;
-};
