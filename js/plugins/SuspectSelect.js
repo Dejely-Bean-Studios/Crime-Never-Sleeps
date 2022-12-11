@@ -11,6 +11,12 @@
  * depending on what was selected.
  * 
  * Use plugin command muder_select to open the window
+ * 
+ * 6 switches in a row are needed to determine the endings
+ * They are in this order: Rellik, Finn, Joe, Daphne, Flora, No One
+ * 
+ * @param switchStart
+ * @desc the first switch to activate an ending
  */
 
 
@@ -22,11 +28,13 @@ Game_Interpreter.prototype.pluginCommand = function(command, args) {
 
 var suspects = 6;
 
-var susID = 0; // TODO maybe change this
+var selected = 0;
 
 const faces = ["faceset_cleanup", "faceset_cop", "faceset_detective", "faceset_secretary", "faceset_wife"];
 
 const names = ["Rellik", "Finn", "Joe", "Daphne", "Flora", "No One"];
+
+var parameters = PluginManager.parameters('SuspectSelect');
 
 // ==================Scene========================
 function Scene_SuspectSelect() {
@@ -46,7 +54,12 @@ Scene_SuspectSelect.prototype.create = function() {
     for (var i = 0; i < suspects; i++) {
         this._suspectselectwindow.setHandler("command" + i, this.confirm.bind(this, i));
     }
-    this.addWindow(this._suspectselectwindow)
+    this.addWindow(this._suspectselectwindow);
+
+    this._textwindow = new Window_Base(160, 35, 500, 72);
+    this._textwindow.drawText("Who is the killer?", -18, 0, 500, "center");
+    this.addWindow(this._textwindow);
+    this._textwindow.setBackgroundType(-1);
 }
 
 Scene_SuspectSelect.prototype.start = function() {
@@ -62,7 +75,7 @@ Scene_SuspectSelect.prototype.update = function() {
 }
 
 Scene_SuspectSelect.prototype.confirm = function(susNum) {
-    susID = susNum;
+    selected = susNum;
     SceneManager.push(Scene_Confirm);
 }
 
@@ -78,10 +91,17 @@ Scene_Confirm.prototype.initialize = function() {
     Scene_MenuBase.prototype.initialize.call(this);
 }
 
-Scene_Confirm.prototype.create = function() { // TODO add commands
+Scene_Confirm.prototype.create = function() { 
     Scene_MenuBase.prototype.create.call(this);
     this._confirmwindow = new Window_Confirm;
+    this._confirmwindow.setHandler("Yes", this.yes.bind(this));
+    this._confirmwindow.setHandler("No", this.no.bind(this));
     this.addWindow(this._confirmwindow);
+
+    this._textwindow = new Window_Base(290, 200, 240, 72);
+    this._textwindow.drawText("Are you sure?", -18, 0, 240, "center");
+    this.addWindow(this._textwindow);
+    this._textwindow.setBackgroundType(-1);
 }
 
 Scene_Confirm.prototype.start = function() {
@@ -89,6 +109,15 @@ Scene_Confirm.prototype.start = function() {
     this._confirmwindow.refresh();
 }
 
+Scene_Confirm.prototype.yes = function() {
+    $gameSwitches.setValue(Number(parameters['switchStart']) + selected, true);
+    this.popScene();
+    this.popScene();
+};
+
+Scene_Confirm.prototype.no = function() {
+    this.popScene();
+}
 
 // =================Window========================
 function Window_SuspectSelect() {
@@ -157,6 +186,7 @@ Window_Confirm.prototype.initialize = function() {
     x = (Graphics.boxWidth / 2) - (this.windowWidth() / 2)
     y = (Graphics.boxHeight / 2) - (this.windowHeight() / 2)
     Window_HorzCommand.prototype.initialize.call(this, x, y);
+    this.select(1);
 }
 
 Window_Confirm.prototype.makeCommandList = function() {
