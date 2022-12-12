@@ -12,8 +12,8 @@
  * 
  * Use plugin command muder_select to open the window
  * 
- * 6 switches in a row are needed to determine the endings
- * They are in this order: Rellik, Finn, Joe, Daphne, Flora, No One
+ * 5 switches in a row are needed to determine the endings
+ * They are in this order: Rellik, Finn, Daphne, Flora, No One
  * 
  * @param switchStart
  * @desc the first switch to activate an ending
@@ -26,13 +26,13 @@ Game_Interpreter.prototype.pluginCommand = function(command, args) {
     if(command === "suspect_select") SceneManager.push(Scene_SuspectSelect);
 }
 
-var suspects = 6;
+var suspects = 5;
 
 var selected = 0;
 
-const faces = ["faceset_cleanup", "faceset_cop", "faceset_detective", "faceset_secretary", "faceset_wife"];
+const faces = ["faceset_cleanup", "faceset_cop", "faceset_secretary", "faceset_wife"];
 
-const names = ["Rellik", "Finn", "Joe", "Daphne", "Flora", "No One"];
+const names = ["Rellik", "Finn", "Daphne", "Flora", "No One"];
 
 var parameters = PluginManager.parameters('SuspectSelect');
 
