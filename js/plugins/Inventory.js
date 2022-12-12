@@ -27,6 +27,7 @@
  * 
  * @param switchStart
  * @desc the number at which the switches for the clues start
+ * @default 61
  * 
  * @param tutorialSwitch
  * @desc the switch to activate the tutorial
@@ -128,12 +129,10 @@
  * @default Glass: Another entrance?
  */
 
-// TODO make inventory be on the correct murder page initially
-// TODO add page sound effect
 
 var Inventory = Inventory || {};
 
-var parameters = PluginManager.parameters('Inventory');
+var inventory_parameters = PluginManager.parameters('Inventory');
 
 var back_blur = true;
 
@@ -141,9 +140,9 @@ var selected_item = 0;
 
 // Map I to a command
 Input.keyMapper["73"] = "I";
-var clues = Number(parameters['numClues']);
+var clues = Number(inventory_parameters['numClues']);
 
-var tutorial = Number(parameters['tutorialSwitch'])
+var tutorial = Number(inventory_parameters['tutorialSwitch'])
 
 // Tracks which command is pressed and is used to display the correct image in more info
 var itemID = 0;
@@ -153,6 +152,8 @@ var numMurders = 4;
 var inventory_background = 'notebook';
 
 var notebook_page = 0;
+
+var current_murder = -1;
 
 var picture_ID = 14;
 
@@ -240,6 +241,7 @@ Scene_Inventory.prototype.update = function() {
 
 Scene_Inventory.prototype.createMurderSelectWindow = function() {
     this._murderselectwindow = new Window_MurderSelect();
+    this._murderselectwindow.getMurder();
     this._murderselectwindow.select(notebook_page);
     this._murderselectwindow.setHandler('ok', this.onMurderOk.bind(this));
     this.addWindow(this._murderselectwindow);
@@ -349,6 +351,7 @@ Window_Inventory.prototype = Object.create(Window_HorzCommand.prototype);
 Window_Inventory.prototype.constructor = Window_Inventory;
 
 Window_Inventory.prototype.initialize = function() {
+    AudioManager.playSe({name: "PageTurn", volume: 30, pitch: 100,});
     x = (Graphics.boxWidth / 2) - (this.windowWidth() / 2)
     y = (Graphics.boxHeight / 2) - (this.windowHeight() / 2)
     this._page = 1;
@@ -406,11 +409,10 @@ Window_Inventory.prototype.setPage = function(page) {
 
 Window_Inventory.prototype.drawItem = function (index) {
     var itemRect = this.itemRect(index);
-    if ($gameSwitches.value(index + (Number(parameters['switchStart'])) + this.getClueStart())) {
+    if ($gameSwitches.value(index + (Number(inventory_parameters['switchStart'])) + this.getClueStart())) {
         this.drawFace("inventoryclues" + this.getPage(), index + 1, itemRect.x + 10, itemRect.y + 10, itemRect.width - 20, itemRect.height - 20); 
     }
     else {
-        // replace 1 after clues with this.getPage() if different coloured question marks are used
         this.drawFace("inventoryclues" + 1, 0, itemRect.x + 10, itemRect.y + 10, itemRect.width - 20, itemRect.height - 20);
     }
 }
@@ -472,12 +474,11 @@ Window_MoreInfo.prototype.initialize = function(image) {
 
 Window_MoreInfo.prototype.drawAllItems = function() {
     this.contents.clear(); 
-    if ($gameSwitches.value(this.image + (Number(parameters['switchStart']) + this.getClueStart()))) {
+    if ($gameSwitches.value(this.image + (Number(inventory_parameters['switchStart']) + this.getClueStart()))) {
         this.drawFace("clues" + this.getPage(), (this.image % 6) + 1, -18, 30, this.width, this.height)
-        this.drawText(parameters["clue" + ((this.image + 1) + this.getClueStart())], 0, this.height / 1.5, this.width - 36, 'center');
+        this.drawText(inventory_parameters["clue" + ((this.image + 1) + this.getClueStart())], 0, this.height / 1.5, this.width - 36, 'center');
     }
     else {
-        // replace 1 after clues with this.getPage() if different coloured question marks are used
         this.drawFace("clues" + 1, 0, -18, 30, this.width, this.height)
         this.drawText("You haven't found this clue yet", 1, this.height / 1.5, this.width - 36, 'center');
     }
@@ -543,4 +544,31 @@ Window_MurderSelect.prototype.makeCommandList = function() {
 
 Window_MurderSelect.prototype.setInventoryWindow = function(inventorywindow) {
     this._inventorywindow = inventorywindow;
+}
+
+Window_MurderSelect.prototype.getMurder = function() {
+    if ($gameSwitches.value(41)) {
+        if (current_murder != 3) {
+            current_murder = 3;
+            notebook_page = 3;
+        }
+    }
+    else if ($gameSwitches.value(40)) {
+        if (current_murder != 2) {
+            current_murder = 2;
+            notebook_page = 2;
+        }
+    }
+    else if ($gameSwitches.value(8)) {
+        if (current_murder != 1) {
+            current_murder = 1;
+            notebook_page = 1;
+        }
+    }
+    else if ($gameSwitches.value(6)) {
+        if (current_murder != 0) {
+            current_murder = 0;
+            notebook_page = 0;
+        }
+    }
 }
