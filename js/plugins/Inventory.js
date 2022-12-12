@@ -129,6 +129,7 @@
  */
 
 // TODO make inventory be on the correct murder page initially
+// TODO add page sound effect
 
 var Inventory = Inventory || {};
 
