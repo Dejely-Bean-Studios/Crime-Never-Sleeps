@@ -16,5 +16,6 @@ var $plugins =
 {"name":"YEP_SaveEventLocations","status":true,"description":"v1.06 Enable specified maps to memorize the locations of\nevents when leaving and loading them upon reentering map.","parameters":{}},
 {"name":"ClickAndDrag","status":true,"description":"Association Puzzle 1","parameters":{}},
 {"name":"ClickAndDrag_2","status":true,"description":"Association Puzzle 2","parameters":{}},
-{"name":"ClickAndDrag_3","status":true,"description":"Association Puzzle 3","parameters":{}}
+{"name":"ClickAndDrag_3","status":true,"description":"Association Puzzle 3","parameters":{}},
+{"name":"SuspectSelect","status":true,"description":"Displays a window to select the suspects","parameters":{"switchStart":"92"}}
 ];
