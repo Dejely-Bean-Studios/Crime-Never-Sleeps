@@ -10,7 +10,7 @@
  * Uses a switch to open the murder select window and activates switches
  * depending on what was selected.
  * 
- * Use plugin command muder_select to open the window
+ * Use plugin command suspect_select to open the window
  * 
  * 5 switches in a row are needed to determine the endings
  * They are in this order: Rellik, Finn, Daphne, Flora, No One
@@ -69,9 +69,6 @@ Scene_SuspectSelect.prototype.start = function() {
 
 Scene_SuspectSelect.prototype.update = function() {
     Scene_MenuBase.prototype.update.call(this);
-    if (Input.isTriggered('escape')) {
-        this.popScene();
-    }
 }
 
 Scene_SuspectSelect.prototype.confirm = function(susNum) {
