@@ -77,10 +77,10 @@ class Drag_2 {
             this._drag_window_2.opacity = 0;
 
             // draw text
-            let text = "\\fs[23]- The fish were moved to the \\fb\\C[1]new temporary tank\\fb\\C[0] before the victim\n  made a crack in the \\fb\\C[1]aquarium\\fb\\C[0].\n" +
+            let text = "\\fs[23]- The fish were moved to the\\fb\\C[1] temporary tank\\fb\\C[0] at a known time.\n" +
             "- The \\fb\\C[1]TV\\fb\\C[0] and the \\fb\\C[1]Regulation Device\\fb\\C[0] malfunctioned at the same time.\n" +
-            "- The \\fb\\C[1]mop bucket\\fb\\C[0] spilled right before the two devices failed.\n" +
-            "- The \\fb\\C[1]unknown event\\fb\\C[0] occured at an unknown time, but after all the\n  events occured\n";
+            "- The \\fb\\C[1]crack\\fb\\C[0] in the glass and the \\fb\\C[1]mob bucket\\fb\\C[0] spilling both happened\n  at an even numbered time.\n" +
+            "- The \\fb\\C[1]mob bucket spilling\\fb\\C[0] and the \\fb\\C[1]fish being moved\\fb\\C[0] occured\n  consecutively, but not necessarily in that order.\n";
 
             this._drag_window_1.drawTextEx(text, 5, -5);
             this._drag_window_2.drawTextEx("\\fs[23]\\C[2]With this in mind, what is a timeline of the events that occurred?\\C[0]", 6, -5);
@@ -297,7 +297,7 @@ class Drag_2 {
                     } else {
                         this._score_window = this._score_window = new Window_Drag(0, 0, Graphics.width, (3/8)*Graphics.height - 10);
                         this.addWindow(this._score_window);
-                        this._score_window.drawText("You've correctly identified " + String(right_answers) + " event" + ((right_answers == 1) ? "." : "s."), 0, 50, Graphics.width, "center");
+                        this._score_window.drawText("Incorrect", 0, 80, Graphics.width, "center");
                         this.frames = 0;
                         this.clicked = true;
                     }

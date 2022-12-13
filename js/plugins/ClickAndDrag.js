@@ -298,7 +298,7 @@ class Drag_1 {
                     } else {
                         this._score_window = this._score_window = new Window_Drag(0, 0, Graphics.width, (3/8)*Graphics.height - 10);
                         this.addWindow(this._score_window);
-                        this._score_window.drawText("You've correctly identified " + String(right_answers) + " event" + ((right_answers == 1) ? "." : "s."), 0, 50, Graphics.width, "center");
+                        this._score_window.drawText("Incorrect", 0, 80, Graphics.width, "center");
                         this.frames = 0;
                         this.clicked = true;
                     }
