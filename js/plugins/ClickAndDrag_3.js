@@ -16,7 +16,7 @@
  * ClickAndDrag_3
  */
 
-Input.keyMapper["72"] = "drag_3";
+//Input.keyMapper["72"] = "drag_3";
 
 class Drag_3 {
     constructor() {
@@ -78,10 +78,10 @@ class Drag_3 {
 
             // draw text
             // TODO change text
-            let text = "\\fs[24]- The \\fb\\C[1]blood splatter\\fb\\C[0] occured immediately after the man was\n  \\fb\\C[1]smashed\\fb\\C[0].\n" +
-            "- The \\fb\\C[1]rope\\fb\\C[0] broke immediately before the man was \\fb\\C[1]smashed\\fb\\C[0].\n" +
-            "- The \\fb\\C[1]dirt\\fb\\C[0] being tracked in was the first event to occur.\n" +
-            "- The \\fb\\C[1]wallet\\fb\\C[0] was on the floor before the \\fb\\C[1]blood\\fb\\C[0] was\n  splattered.\n";
+            let text = "\\fs[21]- Exactly three events occured between the \\fb\\C[1]wallet\\fb\\C[0] hitting the floor and\n  the \\fb\\C[1]cloth\\fb\\C[0] being on the floor, not necessarily in that order.\n"+
+            "- The \\fb\\C[1]blood splattered\\fb\\C[0] immediately after the man was \\fb\\C[1]smashed\\fb\\C[0].\n" +
+            "- Exactly two events occured between when the \\fb\\C[1]dirt\\fb\\C[0] was tracked in and\n  when the man was \\fb\\C[1]smashed\\fb\\C[0], in that order.\n" +
+            "- The \\fb\\C[1]cloth\\fb\\C[0] being on the floor occured sometime after the man was smashed.\n";
 
             this._drag_window_1.drawTextEx(text, 5, -5);
             this._drag_window_2.drawTextEx("\\fs[23]\\C[2]With this in mind, what is a timeline of the events that occurred?\\C[0]", 6, -5);
@@ -298,7 +298,7 @@ class Drag_3 {
                     } else {
                         this._score_window = this._score_window = new Window_Drag(0, 0, Graphics.width, (3/8)*Graphics.height - 10);
                         this.addWindow(this._score_window);
-                        this._score_window.drawText("You've correctly identified " + String(right_answers) + " event" + ((right_answers == 1) ? "." : "s."), 0, 50, Graphics.width, "center");
+                        this._score_window.drawText("Incorrect", 0, 80, Graphics.width, "center");
                         this.frames = 0;
                         this.clicked = true;
                     }
