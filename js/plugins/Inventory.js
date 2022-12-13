@@ -204,6 +204,7 @@ Scene_Inventory.prototype.initialize = function() {
     picX = Graphics.boxWidth / 2
     picY = Graphics.boxHeight / 2
     $gameScreen.showPicture(picture_ID, inventory_background, 1, picX, picY, 100, 100, 255, 0);
+    $gameScreen.showPicture(picture_ID, inventory_background, 1, picX, picY, 100, 100, 255, 0);
     back_blur = false;
 };
 
